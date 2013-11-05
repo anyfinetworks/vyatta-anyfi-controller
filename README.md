@@ -88,82 +88,69 @@ For a more complete description see the
 
 Names etc should probably change? Perhaps <server> isn't the best tag for instance.
 
-  <?xml version="1.0" encoding="utf-8"?>
-  <server>
-	<interface>
-		<port>6726</port>
-		<address>0.0.0.0</address>
-	</interface>
-	<groups>
-		<radio-groups>
-			<radio-group>
-				<name>all</name>
-				<description>all radios</description>
-				<filters>
-					<!-- here goes filters -->
-				</filters>
-				<policy>
-					<signal-dbm>42</signal-dbm>
-					<priority>1</priority>
-				</policy>
-			</radio-group>
-		</radio-groups>
-		<service-groups>
-			<service-group>
-				<name>all</name>
-				<description>all services</description>
-				<filters>
-					<!-- here goes filters -->
-				</filters>
-				<policy>
-					<signal-dbm>42</signal-dbm>
-					<priority>2</priority>
-				</policy>
-			</service-group>
-		</service-groups>
-		<client-groups>
-			<client-group>
-				<name>all</name>
-				<description>all clients</description>
-				<filters>
-					<!-- here goes filters -->
-				</filters>
-				<policy>
-					<signal-dbm>42</signal-dbm>
-					<priority>1</priority>
-				</policy>
-			</client-group>
-			<client-group>
-				<name>special-client</name>
-				<description>a special client group</description>
-				<filters>
-					<!-- here goes filters -->
-				</filters>
-				<policy>
-					<signal-dbm>42</signal-dbm>
-					<priority>100</priority>
-				</policy>
-			</client-group>
-		</client-groups>
-	</groups>
-	<apps>
-		<app>
-			<type>simple</type>
-			
-			<radios>
-				<radio>all</radio>
-			</radios>
-			<services>
-				<service>all</service>
-			</services>
-			<clients>
-				<client>all</client>
-			</clients>			
-			<config>
-				<!-- here goes the specific config for this app -->
-			</config>
-		</app>
-	</apps>
-  </server>
+    <server>
+      <interface>
+        <port>6726</port>
+        <address>0.0.0.0</address>
+      </interface>
+      <groups>
+        <radio-groups>
+          <radio-group>
+            <name>all</name>
+            <description>all radios</description>
+            <filters>
+              <!-- here goes filters -->
+            </filters>
+            <policy>
+              <signal-dbm>42</signal-dbm>
+              <priority>1</priority>
+            </policy>
+          </radio-group>
+        </radio-groups>
+        <service-groups>
+          <service-group>
+            <name>all</name>
+            <description>all services</description>
+            <filters>
+              <!-- here goes filters -->
+            </filters>
+            <policy>
+              <signal-dbm>42</signal-dbm>
+              <priority>2</priority>
+            </policy>
+          </service-group>
+        </service-groups>
+        <client-groups>
+          <client-group>
+            <name>all</name>
+            <description>all clients</description>
+            <filters>
+              <!-- here goes filters -->
+            </filters>
+            <policy>
+              <signal-dbm>42</signal-dbm>
+              <priority>1</priority>
+            </policy>
+          </client-group>
+        </client-groups>
+      </groups>
+      <apps>
+        <app>
+          <type>simple</type>
+          <radios>
+            <radio>all</radio>
+          </radios>
+          <services>
+            <service>all</service>
+          </services>
+          <clients>
+            <client>all</client>
+          </clients>			
+          <config>
+            <!-- here goes the specific config for this app -->
+          </config>
+        </app>
+      </apps>
+    </server>
 
 
