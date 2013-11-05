@@ -23,8 +23,8 @@ For a more complete description see the
             controller
                 radio-group <txt: RADIO GROUP NAME>
                     description <txt: DESCRIPTION>
-                    ip <txt: IP SELECTOR>
-                    mac <txt: MAC SELECTOR>
+                    ip-address <txt: IP SELECTOR>
+                    mac-address <txt: MAC SELECTOR>
                     policy
                         min-signal-level <number>
                         min-upstream-bandwidth <txt: BANDWIDTH SPEC>
@@ -35,7 +35,7 @@ For a more complete description see the
 
                 service-group <txt: SERVICE GROUP NAME>
                     description <txt: DESCRIPTION>
-                    ip <txt: IP SELECTOR>
+                    ip-address <txt: IP SELECTOR>
                     ssid <txt: SSID>
                     uuid <txt: UUID>
                     policy
@@ -43,30 +43,31 @@ For a more complete description see the
 
                 client-group <txt: CLIENT GROUP NAME>
                     description <txt: DESCRIPTION>
-                    mac <txt: MAC SELECTOR>
+                    mac-address <txt: MAC SELECTOR>
                     policy
                         ...
 
-                simple-app <txt: INSTANCE NAME>
-                    description <txt: DESCRIPTION>
-                    radios <txt: RADIO GROUP NAME>
-                    services <txt: SERVICE GROUP NAME>
-                    clients <txt: CLIENT GROUP NAME>
-                    ...
+                applications
+                    simple-app <txt: INSTANCE NAME>
+                        description <txt: DESCRIPTION>
+                        radio-group <txt: RADIO GROUP NAME>
+                        service-group <txt: SERVICE GROUP NAME>
+                        client-group <txt: CLIENT GROUP NAME>
+                        ...
 
-                mobile-app <txt: INSTANCE NAME>
-                    description <txt: DESCRIPTION>
-                    radios <txt: RADIO GROUP NAME>
-                    services <txt: SERVICE GROUP NAME>
-                    clients <txt: CLIENT GROUP NAME>
-                    ...
+                    mobile-app <txt: INSTANCE NAME>
+                        description <txt: DESCRIPTION>
+                        radio-group <txt: RADIO GROUP NAME>
+                        service-group <txt: SERVICE GROUP NAME>
+                        client-group <txt: CLIENT GROUP NAME>
+                        ...
 
-                hotspot-app <txt: INSTANCE NAME>
-                    description <txt: DESCRIPTION>
-                    radios <txt: RADIO GROUP NAME>
-                    services <txt: SERVICE GROUP NAME>
-                    clients <txt: CLIENT GROUP NAME>
-                    ...
+                    hotspot-app <txt: INSTANCE NAME>
+                        description <txt: DESCRIPTION>
+                        radio-group <txt: RADIO GROUP NAME>
+                        service-group <txt: SERVICE GROUP NAME>
+                        client-group <txt: CLIENT GROUP NAME>
+                        ...
 
                 inbound-roaming
                     ...
