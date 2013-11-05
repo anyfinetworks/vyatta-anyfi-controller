@@ -1,0 +1,6 @@
+The Debian Package vyatta-anyfi-controller
+-------------------------------
+
+This package contains Vyatta AnyFi controller integration templates and scripts.
+
+ -- Daniil Baturin <daniil@baturin.org>  Sat, 17 Aug 2013 01:32:10 -0700

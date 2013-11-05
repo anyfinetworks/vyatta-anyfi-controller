@@ -1,0 +1,2 @@
+vyatta-anyfi-controller: file-in-unusual-dir
+vyatta-anyfi-controller: dir-or-file-in-opt
