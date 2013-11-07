@@ -1,2 +1,2 @@
 type: macaddr
-help: Client MAC address
+help: Radio MAC address
