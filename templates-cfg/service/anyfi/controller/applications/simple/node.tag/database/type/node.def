@@ -1,0 +1,5 @@
+type: txt
+help: Database type
+val_help: txt; "Database type"
+val_help: mysql
+allowed: echo -n "mysql"

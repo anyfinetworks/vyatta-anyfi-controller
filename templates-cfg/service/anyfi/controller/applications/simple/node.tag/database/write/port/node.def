@@ -1,0 +1,6 @@
+type: u32
+help: Database connection port
+val_help: u32:1-65535; Database connection port
+syntax:expression: $VAR(@) > 1 && $VAR(@) <= 65535; \
+       "Port must be between 1025 and 65535."
+
