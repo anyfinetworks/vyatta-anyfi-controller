@@ -7,7 +7,7 @@ m4_define([VERSION_ID], [m4_esyscmd([
 	else
 	    echo -n 2.4
 	fi])])
-AC_INIT([vyatta-dummy], VERSION_ID, [eng@anyfi.net])
+AC_INIT([vyatta-dummy], VERSION_ID, [eng@anyfinetworks.com])
 
 test -n "$VYATTA_VERSION" || VYATTA_VERSION=$PACKAGE_VERSION
 

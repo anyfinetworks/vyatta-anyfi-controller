@@ -1,7 +1,7 @@
 Source: vyatta-anyfi-controller
 Section: contrib/net
 Priority: extra
-Maintainer: AnyFi Networks <eng@anyfinetworks.com>
+Maintainer: Anyfi Networks <eng@anyfinetworks.com>
 Standards-Version: 3.9.1
 Build-Depends: debhelper (>= 5), autotools-dev, autoconf
 
@@ -12,5 +12,5 @@ Depends: vyatta-cfg-system,
  vyatta-op,
  ${misc:Depends}
 Replaces: vyatta-dummy
-Description: Vyatta AnyFi controller integration
- Vyatta AnyFi controller integration package
+Description: Vyatta integration for ANYFI CONTROLLER
+ Vyatta ANYFI CONTROLLER integration package
