@@ -25,55 +25,59 @@ For a more complete description see the
                     description <txt: DESCRIPTION>
                     ip-address <txt: IP SELECTOR>
                     mac-address <txt: MAC SELECTOR>
-                    policy
-                        min-signal-level <number>
-                        min-upstream-bandwidth <txt: BANDWIDTH SPEC>
-                        min-downstream-bandwidth <txt: BANDWIDTH SPEC>
-                        min-dwell-time <txt: TIME SPEC>
-                        kick-out
-                        priority <number>
+                    mac-oui <txt: OUI SELECTOR>
 
                 service-group <txt: SERVICE GROUP NAME>
                     description <txt: DESCRIPTION>
                     ip-address <txt: IP SELECTOR>
                     ssid <txt: SSID>
                     uuid <txt: UUID>
-                    policy
-                        ...
 
                 client-group <txt: CLIENT GROUP NAME>
                     description <txt: DESCRIPTION>
                     mac-address <txt: MAC SELECTOR>
-                    policy
-                        ...
+                    mac-oui <txt: OUI SELECTOR>
 
-                applications
-                    simple-app <txt: INSTANCE NAME>
+                app
+                    simple <txt: INSTANCE NAME>
                         description <txt: DESCRIPTION>
-                        radio-group <txt: RADIO GROUP NAME>
-                        service-group <txt: SERVICE GROUP NAME>
-                        client-group <txt: CLIENT GROUP NAME>
+                        radios <txt: RADIO GROUP NAME>
+                        services <txt: SERVICE GROUP NAME>
+                        clients <txt: CLIENT GROUP NAME>
+                        database
+                            mysql
+                                host <txt: HOSTNAME>
+                                password <txt: PASSWORD>
+                                port <txt: PORT NUMBER>
+                                schema <txt: SCHEMA NAME>
+                                user <txt: USERNAME>
+                        policy
+                            min-signal-level <number>
+                            min-upstream-bandwidth <txt: BANDWIDTH SPEC>
+                            min-downstream-bandwidth <txt: BANDWIDTH SPEC>
+                            min-dwell-time <txt: TIME SPEC>
+                            kick-out
                         ...
 
-                    mobile-app <txt: INSTANCE NAME>
+                    mobile <txt: INSTANCE NAME>
                         description <txt: DESCRIPTION>
-                        radio-group <txt: RADIO GROUP NAME>
-                        service-group <txt: SERVICE GROUP NAME>
-                        client-group <txt: CLIENT GROUP NAME>
+                        radios <txt: RADIO GROUP NAME>
+                        services <txt: SERVICE GROUP NAME>
+                        clients <txt: CLIENT GROUP NAME>
                         ...
 
-                    hotspot-app <txt: INSTANCE NAME>
+                    hotspot <txt: INSTANCE NAME>
                         description <txt: DESCRIPTION>
-                        radio-group <txt: RADIO GROUP NAME>
-                        service-group <txt: SERVICE GROUP NAME>
-                        client-group <txt: CLIENT GROUP NAME>
+                        radios <txt: RADIO GROUP NAME>
+                        services <txt: SERVICE GROUP NAME>
+                        clients <txt: CLIENT GROUP NAME>
+                        policy
+                            min-signal-level <number>
+                            min-upstream-bandwidth <txt: BANDWIDTH SPEC>
+                            min-downstream-bandwidth <txt: BANDWIDTH SPEC>
+                            min-dwell-time <txt: TIME SPEC>
+                            kick-out
                         ...
-
-                inbound-roaming
-                    ...
-
-                outbound-roaming
-                    ...
 
 # Operational Commands
 
@@ -146,7 +150,7 @@ Names etc should probably change? Perhaps <server> isn't the best tag for instan
           </services>
           <clients>
             <client>all</client>
-          </clients>			
+          </clients>      
           <config>
             <!-- here goes the specific config for this app -->
           </config>

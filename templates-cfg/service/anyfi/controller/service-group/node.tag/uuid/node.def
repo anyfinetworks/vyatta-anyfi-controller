@@ -1,2 +1,3 @@
 type: txt
-help: Service UUID
+help: Service Universally Unique Identifier (UUID)
+val_help: <hhhh-hh-hh-hh-hhhhhh>; 128-bit Service UUID in hexadecimal

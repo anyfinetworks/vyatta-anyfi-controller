@@ -1,4 +1,4 @@
 tag:
 type: txt
-help: Service group
+help: Group of logical Wi-Fi networks (a.k.a. services)
 val_help: Service group name
