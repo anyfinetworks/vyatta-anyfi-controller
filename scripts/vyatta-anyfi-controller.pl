@@ -29,6 +29,7 @@ use Data::Dumper;
 use XML::Simple;
 
 my $controller_level = "service anyfi controller";
+my $config_path = "/etc/anyfi-controller.xml";
 
 sub get_config
 {
@@ -250,6 +251,9 @@ sub generate_config
 
 my %config_hash = get_config();
 
-print generate_config(\%config_hash);
+open(HANDLE, '>', $config_path) or die "Error opening $config_path: $!";
+print HANDLE generate_config(\%config_hash);
+close HANDLE;
+
 
 exit(0);
