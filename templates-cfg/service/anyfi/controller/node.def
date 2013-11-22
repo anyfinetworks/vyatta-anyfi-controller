@@ -1,1 +1,12 @@
 help: AnyFi Controller
+priority: 999
+end:
+    if [ ${COMMIT_ACTION} == DELETE ]; then
+        echo "Stopping AnyFi controller"
+        sudo rm -f /etc/anyfi-controller.xml
+        sudo /etc/init.d/anyfi-controller stop
+    else
+        sudo /opt/vyatta/sbin/vyatta-anyfi-controller.pl --update || exit 1
+        sudo /etc/init.d/anyfi-controller restart
+    fi
+
