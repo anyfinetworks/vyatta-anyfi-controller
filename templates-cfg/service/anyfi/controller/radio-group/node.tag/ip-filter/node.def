@@ -1,0 +1,8 @@
+type: txt
+
+help: Filter string filtering on radio ip address
+
+val_help: any; match any ip address
+val_help: ipv4net; match this subnet
+val_help: ipv4; match this specific ip address only
+

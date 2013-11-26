@@ -52,10 +52,12 @@ sub get_config
             my %rg_hash;
             $rg_hash{"name"} = $rg;
             $rg_hash{"description"} = $config->returnValue("description");
-            $rg_hash{"filters"}{"ext-ip"} = $config->returnValue("ip-address");
-            $rg_hash{"filters"}{"mac"} = $config->returnValue("mac-address");
-            $rg_hash{"filters"}{"mac-oui"} = $config->returnValue("mac-oui");
- 
+            $rg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
+            $rg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
+
+	    $rg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
+            $rg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
+            
             push @{$radio_hash{"radio-group"}}, \%rg_hash;
             $config->setLevel($controller_level);
         }
@@ -75,10 +77,12 @@ sub get_config
             my %sg_hash;
             $sg_hash{"name"} = $sg;
             $sg_hash{"description"} = $config->returnValue("description");
-            $sg_hash{"filters"}{"ext-ip"} = $config->returnValue("ip-address");
-            $sg_hash{"filters"}{"uuid"} = $config->returnValue("uuid");
-            $sg_hash{"filters"}{"ssid"} = $config->returnValue("ssid");
+            $sg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
+            $sg_hash{"filters"}{"uuid-filter"} = $config->returnValue("uuid-filter");
 
+	    $sg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
+            $sg_hash{"filters"}{"uuid-filter"} =~ s/any/\*/g;
+            
             push @{$service_hash{"service-group"}}, \%sg_hash;
             $config->setLevel($controller_level);
         }
@@ -98,9 +102,10 @@ sub get_config
             my %cg_hash;
             $cg_hash{"name"} = $cg;
             $cg_hash{"description"} = $config->returnValue("description");
-            $cg_hash{"filters"}{"mac"} = $config->returnValue("mac-address");
-            $cg_hash{"filters"}{"mac-oui"} = $config->returnValue("mac-oui");
+            $cg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
 
+            $cg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
+            
             push @{$client_hash{"client-group"}}, \%cg_hash;
             $config->setLevel($controller_level);
         }
@@ -124,12 +129,9 @@ sub get_config
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
 
-            $this_app_hash{"database"}{"mysql"}{"host"} = $config->returnValue("database mysql host");
-            $this_app_hash{"database"}{"mysql"}{"port"} = $config->returnValue("database mysql port");
-            $this_app_hash{"database"}{"mysql"}{"schema"} = $config->returnValue("database mysql schema");
-            $this_app_hash{"database"}{"mysql"}{"user"} = $config->returnValue("database mysql user");
-            $this_app_hash{"database"}{"mysql"}{"password"} = $config->returnValue("database mysql password");
-            $this_app_hash{"database"}{"mysql"}{"type"} = "mysql";
+	    $this_app_hash{"clients"} = {};
+	    $this_app_hash{"services"} = {};
+	    $this_app_hash{"radios"} = {};
             
             for my $client ($config->listNodes("clients"))
             {
@@ -146,31 +148,31 @@ sub get_config
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
 
-            $this_app_hash{"policy"}{"min-signal-level"} = $config->returnValue("policy min-signal-level");
-            $this_app_hash{"policy"}{"min-upstream-bandwidth"} = $config->returnValue("policy min-upstream-bandwidth");
-            $this_app_hash{"policy"}{"min-downstream-bandwidth"} = $config->returnValue("policy min-downstream-bandwidth");
-            $this_app_hash{"policy"}{"min-dwell-time"} = $config->returnValue("policy min-dwell-time");
-            $this_app_hash{"policy"}{"kick-out"} = $config->returnValue("policy kick-out");
+
+            $this_app_hash{"config"} = {};
 
             push @{$app_hash{"app"}}, \%this_app_hash;
             $config->setLevel($controller_level);
         }
-
     }
 
     # Get mobile apps
     if( $config->exists("app mobile") )
     {
-        my @simple_apps = $config->listNodes("app mobile");
-        my %simple_hash;
+        my @mobile_apps = $config->listNodes("app mobile");
+        my %mobile_hash;
 
-        for my $app (@simple_apps)
+        for my $app (@mobile_apps)
         {
             $config->setLevel("$controller_level app mobile $app");
             my %this_app_hash;
             $this_app_hash{"type"} = "mobile";
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
+
+	    $this_app_hash{"clients"} = {};
+	    $this_app_hash{"services"} = {};
+	    $this_app_hash{"radios"} = {};
 
             for my $client ($config->listNodes("clients"))
             {
@@ -186,6 +188,8 @@ sub get_config
             {
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
+
+            $this_app_hash{"config"} = {};
 
             push @{$app_hash{"app"}}, \%this_app_hash;
             $config->setLevel($controller_level);
@@ -195,16 +199,20 @@ sub get_config
     # Get hotspot apps
     if( $config->exists("app hotspot") )
     {
-        my @simple_apps = $config->listNodes("app hotspot");
-        my %simple_hash;
+        my @hotspot_apps = $config->listNodes("app hotspot");
+        my %hotspot_hash;
 
-        for my $app (@simple_apps)
+        for my $app (@hotspot_apps)
         {
             $config->setLevel("$controller_level app hotspot $app");
             my %this_app_hash;
             $this_app_hash{"type"} = "hotspot";
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
+
+	    $this_app_hash{"clients"} = {};
+	    $this_app_hash{"services"} = {};
+	    $this_app_hash{"radios"} = {};
 
             for my $client ($config->listNodes("clients"))
             {
@@ -221,11 +229,7 @@ sub get_config
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
 
-            $this_app_hash{"policy"}{"min-signal-level"} = $config->returnValue("policy min-signal-level");
-            $this_app_hash{"policy"}{"min-upstream-bandwidth"} = $config->returnValue("policy min-upstream-bandwidth");
-            $this_app_hash{"policy"}{"min-downstream-bandwidth"} = $config->returnValue("policy min-downstream-bandwidth");
-            $this_app_hash{"policy"}{"min-dwell-time"} = $config->returnValue("policy min-dwell-time");
-            $this_app_hash{"policy"}{"kick-out"} = $config->returnValue("policy kick-out");
+            $this_app_hash{"config"} = {};
 
             push @{$app_hash{"app"}}, \%this_app_hash;
             $config->setLevel($controller_level);

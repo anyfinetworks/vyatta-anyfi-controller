@@ -1,0 +1,6 @@
+type: txt
+help: Filter string filtering on radio mac address
+val_help: any; match any mac
+val_help: <h:h:h>; match all mac addresses matching this OUI (Organizationally unique identifier)
+val_help: <h:h:h:h:h:h>; match this specific mac address only
+

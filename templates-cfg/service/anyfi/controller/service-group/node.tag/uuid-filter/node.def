@@ -1,0 +1,5 @@
+type: txt
+help: Filter string filtering on service uuid
+
+val_help: any; match any service uuid
+val_help: <hhhh-hh-hh-hh-hhhhhh>; match this 128-bit Service UUID in hexadecimal only

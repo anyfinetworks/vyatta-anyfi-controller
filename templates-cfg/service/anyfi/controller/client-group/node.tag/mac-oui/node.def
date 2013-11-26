@@ -1,3 +1,0 @@
-type: txt
-help: Client MAC Organizational Unique Identifier (OUI)
-val_help: <h:h:h>; Client MAC Organizational Unique Identifier (OUI)
