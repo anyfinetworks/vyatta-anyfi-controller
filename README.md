@@ -23,61 +23,37 @@ For a more complete description see the
             controller
                 radio-group <txt: RADIO GROUP NAME>
                     description <txt: DESCRIPTION>
-                    ip-address <txt: IP SELECTOR>
-                    mac-address <txt: MAC SELECTOR>
-                    mac-oui <txt: OUI SELECTOR>
+                    ip-filter <txt: IP FILTER>
+                    mac-filter <txt: MAC FILTER>
 
                 service-group <txt: SERVICE GROUP NAME>
                     description <txt: DESCRIPTION>
-                    ip-address <txt: IP SELECTOR>
-                    ssid <txt: SSID>
-                    uuid <txt: UUID>
+                    ip-filter <txt: IP FILTER>
+                    uuid-filter <txt: UUID FILTER>
 
                 client-group <txt: CLIENT GROUP NAME>
                     description <txt: DESCRIPTION>
-                    mac-address <txt: MAC SELECTOR>
-                    mac-oui <txt: OUI SELECTOR>
+                    mac-filter <txt: MAC FILTER>
 
                 app
                     simple <txt: INSTANCE NAME>
                         description <txt: DESCRIPTION>
-                        radios <txt: RADIO GROUP NAME>
-                        services <txt: SERVICE GROUP NAME>
-                        clients <txt: CLIENT GROUP NAME>
-                        database
-                            mysql
-                                host <txt: HOSTNAME>
-                                password <txt: PASSWORD>
-                                port <txt: PORT NUMBER>
-                                schema <txt: SCHEMA NAME>
-                                user <txt: USERNAME>
-                        policy
-                            min-signal-level <number>
-                            min-upstream-bandwidth <txt: BANDWIDTH SPEC>
-                            min-downstream-bandwidth <txt: BANDWIDTH SPEC>
-                            min-dwell-time <txt: TIME SPEC>
-                            kick-out
-                        ...
+                        radios <txt: RADIO GROUP NAME or ANY>
+                        services <txt: SERVICE GROUP NAME or ANY>
+                        clients <txt: CLIENT GROUP NAME or ANY>
 
                     mobile <txt: INSTANCE NAME>
                         description <txt: DESCRIPTION>
-                        radios <txt: RADIO GROUP NAME>
-                        services <txt: SERVICE GROUP NAME>
-                        clients <txt: CLIENT GROUP NAME>
-                        ...
+                        radios <txt: RADIO GROUP NAME or ANY>
+                        services <txt: SERVICE GROUP NAME or ANY>
+                        clients <txt: CLIENT GROUP NAME or ANY>
 
                     hotspot <txt: INSTANCE NAME>
                         description <txt: DESCRIPTION>
-                        radios <txt: RADIO GROUP NAME>
-                        services <txt: SERVICE GROUP NAME>
-                        clients <txt: CLIENT GROUP NAME>
-                        policy
-                            min-signal-level <number>
-                            min-upstream-bandwidth <txt: BANDWIDTH SPEC>
-                            min-downstream-bandwidth <txt: BANDWIDTH SPEC>
-                            min-dwell-time <txt: TIME SPEC>
-                            kick-out
-                        ...
+                        radios <txt: RADIO GROUP NAME or ANY>
+                        services <txt: SERVICE GROUP NAME or ANY>
+                        clients <txt: CLIENT GROUP NAME or ANY>
+                        TODO: broadcast services
 
 # Operational Commands
 
