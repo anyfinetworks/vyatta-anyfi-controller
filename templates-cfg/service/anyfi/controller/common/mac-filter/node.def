@@ -1,0 +1,8 @@
+type: txt
+
+help: Filter string filtering on mac address
+
+val_help: any; match any mac
+val_help: <hh:hh:hh>; match all mac addresses matching this OUI (Organizationally unique identifier)
+val_help: <hh:hh:hh:hh:hh:hh>; match this specific mac address only
+syntax:expression: pattern $VAR(@) "^([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})$" || pattern $VAR(@) "^([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})$" || pattern $VAR(@) "any"; "bad format"

@@ -1,0 +1,7 @@
+type: txt
+
+help: Filter string filtering on uuid
+
+val_help: any; match any service uuid
+val_help: <hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>; match this 128-bit Service UUID in hexadecimal only
+syntax:expression: pattern $VAR(@) "^[0-9A-Fa-f]{8}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{4}-[0-9A-Fa-f]{12}$" || pattern $VAR(@) "any"; "bad format"
