@@ -1,0 +1,8 @@
+type: txt
+
+help: Filter string filtering on ip address (TODO: netmask!)
+
+val_help: any; match any ip address
+val_help: ipv4net; match this subnet
+val_help: ipv4; match this specific ip address only
+syntax:expression: pattern $VAR(@) "^([1-9]?\\d|1 \\d\\d|2[0-4]\\d|25[0-5])\\.([1-9]?\\d|1 \\d\\d|2[0-4]\\d|25[0-5])\\.([1-9]?\\d|1 \\d\\d|2[0-4]\\d|25[0-5])\\.([1-9]?\\d|1 \\d\\d|2[0-4]\\d|25[0-5])$"" || pattern $VAR(@) "any"; "bad format"
