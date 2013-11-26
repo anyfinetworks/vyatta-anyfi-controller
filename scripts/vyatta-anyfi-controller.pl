@@ -41,10 +41,19 @@ sub get_config
     my %app_hash;
 
     # Get radio groups
-    if( $config->exists("radio-group") )
     {
         my @radio_groups = $config->listNodes("radio-group");
         my %radio_hash;
+
+	# Create the any group
+	{
+            my %rg_hash;
+            $rg_hash{"name"} = "any";
+            $rg_hash{"description"} = "automatically generated wildcard group";
+            $rg_hash{"filters"}{"ip-filter"} = "*";
+            $rg_hash{"filters"}{"mac-filter"} = "*";
+            push @{$radio_hash{"radio-group"}}, \%rg_hash;
+        }
 
         for my $rg (@radio_groups)
         {
@@ -66,10 +75,19 @@ sub get_config
     }
 
     # Get service groups
-    if( $config->exists("service-group") )
     {
         my @service_groups = $config->listNodes("service-group");
         my %service_hash;
+
+	# Create the any group
+	{
+            my %sg_hash;
+            $sg_hash{"name"} = "any";
+            $sg_hash{"description"} = "automatically generated wildcard group";
+            $sg_hash{"filters"}{"ip-filter"} = "*";
+            $sg_hash{"filters"}{"uuid-filter"} = "*";
+            push @{$service_hash{"service-group"}}, \%sg_hash;
+        }
 
         for my $sg (@service_groups)
         {
@@ -91,10 +109,18 @@ sub get_config
     }
 
     # Get client groups
-    if( $config->exists("client-group") )
     {
         my @client_groups = $config->listNodes("client-group");
         my %client_hash;
+
+	# Create the any group
+	{
+            my %cg_hash;
+            $cg_hash{"name"} = "any";
+            $cg_hash{"description"} = "automatically generated wildcard group";
+            $cg_hash{"filters"}{"mac-filter"} = "*";
+            push @{$client_hash{"client-group"}}, \%cg_hash;
+        }
 
         for my $cg (@client_groups)
         {
