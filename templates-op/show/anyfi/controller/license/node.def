@@ -1,0 +1,2 @@
+help: Show AnyFi controller license agreement
+run: anyfi-console license
