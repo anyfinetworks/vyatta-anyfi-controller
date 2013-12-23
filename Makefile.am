@@ -8,6 +8,8 @@ vsbindir = $(vprefix)/sbin
 
 sbin_SCRIPTS = scripts/vyatta-anyfi-controller.pl
 
+bin_SCRIPTS = scripts/vyatta-anyfi-controller-verify.pl
+
 bin_sudo_users_SCRIPTS =
 
 curver_DATA = 

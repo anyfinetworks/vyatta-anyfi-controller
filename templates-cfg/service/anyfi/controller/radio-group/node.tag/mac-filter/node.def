@@ -4,4 +4,4 @@ help: Filter string filtering on mac address
 
 val_help: <hh:hh:hh>; match all mac addresses matching this OUI (Organizationally unique identifier)
 val_help: <hh:hh:hh:hh:hh:hh>; match this specific mac address only
-syntax:expression: pattern $VAR(@) "^!?([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})$" || pattern $VAR(@) "^!?([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})[:-]([0-9A-Fa-f]{2})$" ; "bad format"
+syntax:expression: exec "/opt/vyatta/bin/vyatta-anyfi-controller-verify.pl --check=mac --data=\"$VAR(@)\""; "bad format"
