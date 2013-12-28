@@ -64,8 +64,15 @@ sub get_config
             $rg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
             $rg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
 
-	    $rg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
-            $rg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
+            if( defined($rg_hash{"filters"}{"ip-filter"}) )
+            {
+                $rg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
+            }
+
+            if( defined($rg_hash{"filters"}{"mac-filter"}) )
+            {
+                $rg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
+            }
             
             push @{$radio_hash{"radio-group"}}, \%rg_hash;
             $config->setLevel($controller_level);
@@ -98,8 +105,15 @@ sub get_config
             $sg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
             $sg_hash{"filters"}{"uuid-filter"} = $config->returnValue("uuid-filter");
 
-	    $sg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
-            $sg_hash{"filters"}{"uuid-filter"} =~ s/any/\*/g;
+            if( defined($sg_hash{"filters"}{"ip-filter"}) )
+            {
+                $sg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
+            }
+
+            if( defined($sg_hash{"filters"}{"uuid-filter"}) )
+            {
+                $sg_hash{"filters"}{"uuid-filter"} =~ s/any/\*/g;
+            }
             
             push @{$service_hash{"service-group"}}, \%sg_hash;
             $config->setLevel($controller_level);
@@ -130,7 +144,10 @@ sub get_config
             $cg_hash{"description"} = $config->returnValue("description");
             $cg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
 
-            $cg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
+            if( defined($cg_hash{"filters"}{"mac-filter"}) )
+            {
+                $cg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
+            }
             
             push @{$client_hash{"client-group"}}, \%cg_hash;
             $config->setLevel($controller_level);
