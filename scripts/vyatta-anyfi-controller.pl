@@ -119,7 +119,7 @@ sub get_config
             }
             else
             {
-                $rg_hash{"filters"}{"ip-filter"} = "*";
+                $sg_hash{"filters"}{"ip-filter"} = "*";
             }
 
             if( defined($sg_hash{"filters"}{"uuid-filter"}) )
@@ -128,7 +128,7 @@ sub get_config
             }
             else
             {
-                $rg_hash{"filters"}{"uuid-filter"} = "*";
+                $sg_hash{"filters"}{"uuid-filter"} = "*";
             }
 
             
@@ -167,7 +167,7 @@ sub get_config
             }
             else
             {
-                $rg_hash{"filters"}{"mac-filter"} = "*";
+                $cg_hash{"filters"}{"mac-filter"} = "*";
             }
             
             push @{$client_hash{"client-group"}}, \%cg_hash;
