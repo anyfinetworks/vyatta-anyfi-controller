@@ -201,17 +201,28 @@ sub get_config
             {
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
+	    if (!%{$this_app_hash{"clients"}}) 
+	    {
+		push @{$this_app_hash{"clients"}{"client"}}, "any";
+	    }
 
             for my $service ($config->listNodes("services"))
             {
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
+	    if (!%{$this_app_hash{"services"}}) 
+	    {
+		push @{$this_app_hash{"services"}{"service"}}, "any";
+	    }
 
             for my $radio ($config->listNodes("radios"))
             {
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
-
+	    if (!%{$this_app_hash{"radios"}}) 
+	    {
+		push @{$this_app_hash{"radios"}{"radio"}}, "any";
+	    }
 
             $this_app_hash{"config"} = {};
 
@@ -242,16 +253,28 @@ sub get_config
             {
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
+	    if (!%{$this_app_hash{"clients"}}) 
+	    {
+		push @{$this_app_hash{"clients"}{"client"}}, "any";
+	    }
 
             for my $service ($config->listNodes("services"))
             {
                 push @{$this_app_hash{"services"}{"service"}}, $service;
-            }
+            }	    
+	    if (!%{$this_app_hash{"services"}}) 
+	    {
+		push @{$this_app_hash{"services"}{"service"}}, "any";
+	    }
 
             for my $radio ($config->listNodes("radios"))
             {
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
+	    if (!%{$this_app_hash{"radios"}}) 
+	    {
+		push @{$this_app_hash{"radios"}{"radio"}}, "any";
+	    }
 
             $this_app_hash{"config"} = {};
 
@@ -282,16 +305,28 @@ sub get_config
             {
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
+	    if (!%{$this_app_hash{"clients"}}) 
+	    {
+		push @{$this_app_hash{"clients"}{"client"}}, "any";
+	    }
 
             for my $service ($config->listNodes("services"))
             {
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
+	    if (!%{$this_app_hash{"services"}}) 
+	    {
+		push @{$this_app_hash{"services"}{"service"}}, "any";
+	    }
 
             for my $radio ($config->listNodes("radios"))
             {
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
+	    if (!%{$this_app_hash{"radios"}}) 
+	    {
+		push @{$this_app_hash{"radios"}{"radio"}}, "any";
+	    }
 
             $this_app_hash{"config"} = {};
 
