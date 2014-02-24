@@ -1,6 +1,0 @@
-tag:
-type: txt
-help: Radio groups to filter incoming radio requests on
-val_help: any; accept requests from any radio
-val_help: <group_name>; accept requests only from this radio group
-

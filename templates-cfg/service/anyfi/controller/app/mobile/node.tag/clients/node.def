@@ -1,6 +1,0 @@
-tag:
-type: txt
-help: Client groups to filter incoming client requests on
-val_help: any; accept requests from any client
-val_help: <group_name>; accept requests only from this client group
-

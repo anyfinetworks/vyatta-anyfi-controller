@@ -231,58 +231,6 @@ sub get_config
         }
     }
 
-    # Get mobile apps
-    if( $config->exists("app mobile") )
-    {
-        my @mobile_apps = $config->listNodes("app mobile");
-        my %mobile_hash;
-
-        for my $app (@mobile_apps)
-        {
-            $config->setLevel("$controller_level app mobile $app");
-            my %this_app_hash;
-            $this_app_hash{"type"} = "mobile";
-            $this_app_hash{"name"} = $app;
-            $this_app_hash{"description"} = $config->returnValue("description");
-
-            $this_app_hash{"clients"} = {};
-            $this_app_hash{"services"} = {};
-            $this_app_hash{"radios"} = {};
-
-            for my $client ($config->listNodes("clients"))
-            {
-                push @{$this_app_hash{"clients"}{"client"}}, $client;
-            }
-	    if (!%{$this_app_hash{"clients"}}) 
-	    {
-		push @{$this_app_hash{"clients"}{"client"}}, "any";
-	    }
-
-            for my $service ($config->listNodes("services"))
-            {
-                push @{$this_app_hash{"services"}{"service"}}, $service;
-            }	    
-	    if (!%{$this_app_hash{"services"}}) 
-	    {
-		push @{$this_app_hash{"services"}{"service"}}, "any";
-	    }
-
-            for my $radio ($config->listNodes("radios"))
-            {
-                push @{$this_app_hash{"radios"}{"radio"}}, $radio;
-            }
-	    if (!%{$this_app_hash{"radios"}}) 
-	    {
-		push @{$this_app_hash{"radios"}{"radio"}}, "any";
-	    }
-
-            $this_app_hash{"config"} = {};
-
-            push @{$app_hash{"app"}}, \%this_app_hash;
-            $config->setLevel($controller_level);
-        }
-    }
-
     # Get hotspot apps
     if( $config->exists("app hotspot") )
     {
