@@ -1,6 +1,5 @@
-tag:
+multi:
 type: txt
 help: Service groups to filter incoming service requests on
 val_help: any; accept requests from any service
-val_help: <group_name>; accept requests only from this service group
-
+allowed: cli-shell-api listActiveNodes service anyfi controller service-group
