@@ -197,7 +197,7 @@ sub get_config
             $this_app_hash{"services"} = {};
             $this_app_hash{"radios"} = {};
             
-            for my $client ($config->listNodes("clients"))
+            for my $client ($config->returnValues("clients"))
             {
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
@@ -206,7 +206,7 @@ sub get_config
 		push @{$this_app_hash{"clients"}{"client"}}, "any";
 	    }
 
-            for my $service ($config->listNodes("services"))
+            for my $service ($config->returnValues("services"))
             {
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
@@ -215,7 +215,7 @@ sub get_config
 		push @{$this_app_hash{"services"}{"service"}}, "any";
 	    }
 
-            for my $radio ($config->listNodes("radios"))
+            for my $radio ($config->returnValues("radios"))
             {
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
@@ -249,7 +249,7 @@ sub get_config
             $this_app_hash{"services"} = {};
             $this_app_hash{"radios"} = {};
 
-            for my $client ($config->listNodes("clients"))
+            for my $client ($config->returnValues("clients"))
             {
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
@@ -258,7 +258,7 @@ sub get_config
 		push @{$this_app_hash{"clients"}{"client"}}, "any";
 	    }
 
-            for my $service ($config->listNodes("services"))
+            for my $service ($config->returnValues("services"))
             {
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
@@ -267,7 +267,7 @@ sub get_config
 		push @{$this_app_hash{"services"}{"service"}}, "any";
 	    }
 
-            for my $radio ($config->listNodes("radios"))
+            for my $radio ($config->returnValues("radios"))
             {
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
