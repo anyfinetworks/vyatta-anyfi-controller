@@ -1,0 +1,4 @@
+type:  txt
+help: Minimum downlink capacity (Mbps)
+val_help: <xx.xx>; ex. 0.4 for 0.4 Mbps downlink
+

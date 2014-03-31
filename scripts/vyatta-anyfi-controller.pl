@@ -193,6 +193,22 @@ sub get_config
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
 
+	    if ( $config->exists("visibility-policy") ) {
+		$this_app_hash{"visibility-policy"} = {};
+		if ( $config->exists("visibility-policy min-dwell-time-s") ) {
+		    $this_app_hash{"visibility-policy"}{"min-dwell-time-sec"} = $config->returnValue("visibility-policy min-dwell-time-s");
+		}
+		if ( $config->exists("visibility-policy min-signal-level-dBm") ) {
+		    $this_app_hash{"visibility-policy"}{"min-signal-dbm"} = $config->returnValue("visibility-policy min-signal-level-dBm");
+		}
+		if ( $config->exists("visibility-policy min-uplink-capacity-Mbps") ) {
+		    $this_app_hash{"visibility-policy"}{"min-uplink-bps"} = int($config->returnValue("visibility-policy min-uplink-capacity-Mbps")*1024*1024);
+		}
+		if ( $config->exists("visibility-policy min-downlink-capacity-Mbps") ) {
+		    $this_app_hash{"visibility-policy"}{"min-downlink-bps"} = int($config->returnValue("visibility-policy min-downlink-capacity-Mbps")*1024*1024);
+		}
+	    }
+
             $this_app_hash{"clients"} = {};
             $this_app_hash{"services"} = {};
             $this_app_hash{"radios"} = {};
@@ -244,6 +260,22 @@ sub get_config
             $this_app_hash{"type"} = "hotspot";
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
+
+	    if ( $config->exists("visibility-policy") ) {
+		$this_app_hash{"visibility-policy"} = {};
+		if ( $config->exists("visibility-policy min-dwell-time-s") ) {
+		    $this_app_hash{"visibility-policy"}{"min-dwell-time-sec"} = $config->returnValue("visibility-policy min-dwell-time-s");
+		}
+		if ( $config->exists("visibility-policy min-signal-level-dBm") ) {
+		    $this_app_hash{"visibility-policy"}{"min-signal-dbm"} = $config->returnValue("visibility-policy min-signal-level-dBm");
+		}
+		if ( $config->exists("visibility-policy min-uplink-capacity-Mbps") ) {
+		    $this_app_hash{"visibility-policy"}{"min-uplink-bps"} = int($config->returnValue("visibility-policy min-uplink-capacity-Mbps")*1024*1024);
+		}
+		if ( $config->exists("visibility-policy min-downlink-capacity-Mbps") ) {
+		    $this_app_hash{"visibility-policy"}{"min-downlink-bps"} = int($config->returnValue("visibility-policy min-downlink-capacity-Mbps")*1024*1024);
+		}
+	    }
 
             $this_app_hash{"clients"} = {};
             $this_app_hash{"services"} = {};
