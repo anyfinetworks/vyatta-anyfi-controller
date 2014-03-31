@@ -31,6 +31,30 @@ use XML::Simple;
 my $controller_level = "service anyfi controller";
 my $config_path = "/etc/anyfi-controller.xml";
 
+sub check_group {
+    my $name = $_[0];
+    my $type = $_[1];
+    my $config = new Vyatta::Config();
+    $config->setLevel($controller_level);
+
+    die "$type group $name is not defined at: $controller_level $type-group $name" unless $config->exists("${type}-group $name")	
+}
+
+sub check_client_group {
+    my $client = $_[0];
+    check_group($client, "client");
+}
+
+sub check_service_group {
+    my $service = $_[0];
+    check_group($service, "service");
+}
+
+sub check_radio_group {
+    my $radio = $_[0];
+    check_group($radio, "radio");
+}
+
 sub get_config
 {
     my $config = new Vyatta::Config();
@@ -215,6 +239,7 @@ sub get_config
             
             for my $client ($config->returnValues("clients"))
             {
+		check_client_group($client);
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
 	    if (!%{$this_app_hash{"clients"}}) 
@@ -224,6 +249,7 @@ sub get_config
 
             for my $service ($config->returnValues("services"))
             {
+		check_service_group($service);
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
 	    if (!%{$this_app_hash{"services"}}) 
@@ -233,6 +259,7 @@ sub get_config
 
             for my $radio ($config->returnValues("radios"))
             {
+		check_radio_group($radio);
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
 	    if (!%{$this_app_hash{"radios"}}) 
@@ -283,6 +310,7 @@ sub get_config
 
             for my $client ($config->returnValues("clients"))
             {
+		check_client_group($client);
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
 	    if (!%{$this_app_hash{"clients"}}) 
@@ -292,6 +320,7 @@ sub get_config
 
             for my $service ($config->returnValues("services"))
             {
+		check_service_group($service);
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
 	    if (!%{$this_app_hash{"services"}}) 
@@ -301,6 +330,7 @@ sub get_config
 
             for my $radio ($config->returnValues("radios"))
             {
+		check_radio_group($radio);
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
 	    if (!%{$this_app_hash{"radios"}}) 
