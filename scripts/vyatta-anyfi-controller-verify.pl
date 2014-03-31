@@ -13,7 +13,7 @@ my $exp_hex = qr/[0-9A-Fa-f]/;
 
 sub check_uuid
 {
-    my $exp_uuid = qr/^$exp_hex{8}-$exp_hex{4}-$exp_hex{4}-$exp_hex{4}-$exp_hex{12}$/;
+    my $exp_uuid = qr/^!?$exp_hex{8}-$exp_hex{4}-$exp_hex{4}-$exp_hex{4}-$exp_hex{12}$/;
     my $arg = shift;
 
     if( $arg =~ /$exp_uuid/ )
@@ -27,8 +27,8 @@ sub check_uuid
 }
 
 sub check_mac {
-    my $mac_oui_expr = qr/^$exp_hex{2}([:-]$exp_hex{2}){2}$/;
-    my $mac_expr = qr/^$exp_hex{2}([:-]$exp_hex{2}){5}$/;
+    my $mac_oui_expr = qr/^!?$exp_hex{2}([:-]$exp_hex{2}){2}$/;
+    my $mac_expr = qr/^!?$exp_hex{2}([:-]$exp_hex{2}){5}$/;
     my $arg = shift;
 
     if( ($arg =~ /$mac_oui_expr/) ||
@@ -54,21 +54,12 @@ sub check_ip
     # Match 0-32
     my $exp_netmask = qr/([1-2]?\d|3[0-2])/;
     # Full CIDR
-    my $exp_ip_filter = qr/^$exp_ip(\/$exp_netmask)?$/;
+    my $exp_ip_filter = qr/^!?$exp_ip(\/$exp_netmask)?$/;
 
-    if( $arg !~ /$exp_ip_filter/ )
-    {
-        return(FAIL);
-    }
-
-    my $ip = new NetAddr::IP($arg);
-
-    if( defined($ip) )
+    if( $arg =~ /$exp_ip_filter/ )
     {
         return(SUCCESS);
-    }
-    else
-    {
+    } else {
         return(FAIL);
     }
 }
