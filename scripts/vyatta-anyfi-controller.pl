@@ -242,30 +242,18 @@ sub get_config
 		check_client_group($client);
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
-	    if (!%{$this_app_hash{"clients"}}) 
-	    {
-		push @{$this_app_hash{"clients"}{"client"}}, "any";
-	    }
 
             for my $service ($config->returnValues("services"))
             {
 		check_service_group($service);
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
-	    if (!%{$this_app_hash{"services"}}) 
-	    {
-		push @{$this_app_hash{"services"}{"service"}}, "any";
-	    }
 
             for my $radio ($config->returnValues("radios"))
             {
 		check_radio_group($radio);
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
-	    if (!%{$this_app_hash{"radios"}}) 
-	    {
-		push @{$this_app_hash{"radios"}{"radio"}}, "any";
-	    }
 
             $this_app_hash{"config"} = {};
 
@@ -313,30 +301,18 @@ sub get_config
 		check_client_group($client);
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
-	    if (!%{$this_app_hash{"clients"}}) 
-	    {
-		push @{$this_app_hash{"clients"}{"client"}}, "any";
-	    }
 
             for my $service ($config->returnValues("services"))
             {
 		check_service_group($service);
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
-	    if (!%{$this_app_hash{"services"}}) 
-	    {
-		push @{$this_app_hash{"services"}{"service"}}, "any";
-	    }
 
             for my $radio ($config->returnValues("radios"))
             {
 		check_radio_group($radio);
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
-	    if (!%{$this_app_hash{"radios"}}) 
-	    {
-		push @{$this_app_hash{"radios"}{"radio"}}, "any";
-	    }
 
             $this_app_hash{"config"} = {};
 
