@@ -1,4 +1,4 @@
 type:  u32
-help: Minimum dwell time (seconds)
+help: Minimum dwell time in seconds
 val_help: u32; ex 30 to require 30 seconds of dwell time
 

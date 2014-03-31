@@ -1,4 +1,4 @@
 type: txt 
-help: Minimum signal level (dBm)
+help: Minimum signal level in dBm
 val_help: <-127-128>; Ex -65 to require a signal level of at least -65 dBm
 
