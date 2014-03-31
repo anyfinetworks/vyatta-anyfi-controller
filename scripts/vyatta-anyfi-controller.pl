@@ -199,7 +199,7 @@ sub get_config
 		    $this_app_hash{"visibility-policy"}{"min-dwell-time-sec"} = $config->returnValue("visibility-policy min-dwell-time-s");
 		}
 		if ( $config->exists("visibility-policy min-signal-level-dBm") ) {
-		    $this_app_hash{"visibility-policy"}{"min-signal-dbm"} = $config->returnValue("visibility-policy min-signal-level-dBm");
+		    $this_app_hash{"visibility-policy"}{"min-signal-level-dbm"} = $config->returnValue("visibility-policy min-signal-level-dBm");
 		}
 		if ( $config->exists("visibility-policy min-uplink-capacity-Mbps") ) {
 		    $this_app_hash{"visibility-policy"}{"min-uplink-bps"} = int($config->returnValue("visibility-policy min-uplink-capacity-Mbps")*1024*1024);
