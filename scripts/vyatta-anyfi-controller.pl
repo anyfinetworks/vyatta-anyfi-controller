@@ -31,13 +31,20 @@ use XML::Simple;
 my $controller_level = "service anyfi controller";
 my $config_path = "/etc/anyfi-controller.xml";
 
+sub error
+{
+    my $msg = shift;
+    print "Error configuring Anyfi Controller: $msg\n";
+    exit(1);
+}
+
 sub check_group {
     my $name = $_[0];
     my $type = $_[1];
     my $config = new Vyatta::Config();
     $config->setLevel($controller_level);
 
-    die "$type group $name is not defined at: $controller_level $type-group $name" unless $config->exists("${type}-group $name")	
+    error("$type group $name is not defined at: $controller_level $type-group $name") unless $config->exists("${type}-group $name")	
 }
 
 sub check_client_group {
@@ -340,7 +347,7 @@ sub generate_config
 
 my %config_hash = get_config();
 
-open(HANDLE, '>', $config_path) or die "Error opening $config_path: $!";
+open(HANDLE, '>', $config_path) or error("Error opening $config_path: $!");
 print HANDLE generate_config(\%config_hash);
 close HANDLE;
 
