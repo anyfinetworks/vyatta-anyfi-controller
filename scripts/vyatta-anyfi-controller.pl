@@ -1,10 +1,10 @@
 #!/usr/bin/perl
 #
-# vyatta-anyfi-controller.pl: AnyFi controller config generator
+# vyatta-anyfi-controller.pl: Anyfi controller config generator
 #
 # Maintainer: Daniil Baturin <daniil@baturin.org>
 #
-# Copyright (C) 2013 AnyFi Networks
+# Copyright (C) 2013 Anyfi Networks
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2 as
