@@ -1,2 +1,2 @@
-help: Show services connected to AnyFi controller
+help: Show services connected to the controller
 run: /usr/sbin/anyfi-console services

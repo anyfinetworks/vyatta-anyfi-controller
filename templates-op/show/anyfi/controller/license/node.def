@@ -1,2 +1,2 @@
-help: Show AnyFi controller license agreement
+help: Show Anyfi Controller license agreement
 run: /usr/sbin/anyfi-console license

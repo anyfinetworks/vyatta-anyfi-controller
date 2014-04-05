@@ -1,2 +1,2 @@
-help: Show AnyFi controller log level
+help: Show Anyfi Controller log level
 run: /usr/sbin/anyfi-console loglevel
