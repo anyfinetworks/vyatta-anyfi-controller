@@ -1,2 +1,2 @@
-help: Show radios connected to AnyFi controller
+help: Show radios connected to the controller
 run: /usr/sbin/anyfi-console radios

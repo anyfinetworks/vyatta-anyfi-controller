@@ -1,4 +1,4 @@
-help: AnyFi Controller
+help: Anyfi Controller
 priority: 999
 end:
     if [ ${COMMIT_ACTION} == DELETE ]; then
