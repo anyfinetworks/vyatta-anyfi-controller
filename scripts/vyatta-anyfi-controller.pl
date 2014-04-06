@@ -223,19 +223,19 @@ sub get_config
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
 
-	    if ( $config->exists("visibility-policy") ) {
-		$this_app_hash{"visibility-policy"} = {};
-		if ( $config->exists("visibility-policy min-dwell-time") ) {
-		    $this_app_hash{"visibility-policy"}{"min-dwell-time-sec"} = $config->returnValue("visibility-policy min-dwell-time");
+	    if ( $config->exists("radio-policy") ) {
+		$this_app_hash{"radio-policy"} = {};
+		if ( $config->exists("radio-policy min-dwell-time") ) {
+		    $this_app_hash{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time");
 		}
-		if ( $config->exists("visibility-policy min-signal-level") ) {
-		    $this_app_hash{"visibility-policy"}{"min-signal-level-dbm"} = $config->returnValue("visibility-policy min-signal-level");
+		if ( $config->exists("radio-policy min-signal-level") ) {
+		    $this_app_hash{"radio-policy"}{"min-signal-level-dbm"} = $config->returnValue("radio-policy min-signal-level");
 		}
-		if ( $config->exists("visibility-policy min-uplink-capacity") ) {
-		    $this_app_hash{"visibility-policy"}{"min-uplink-bps"} = int($config->returnValue("visibility-policy min-uplink-capacity")*1024*1024);
+		if ( $config->exists("radio-policy min-uplink-capacity") ) {
+		    $this_app_hash{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity")*1024*1024);
 		}
-		if ( $config->exists("visibility-policy min-downlink-capacity") ) {
-		    $this_app_hash{"visibility-policy"}{"min-downlink-bps"} = int($config->returnValue("visibility-policy min-downlink-capacity")*1024*1024);
+		if ( $config->exists("radio-policy min-downlink-capacity") ) {
+		    $this_app_hash{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity")*1024*1024);
 		}
 	    }
 
@@ -282,19 +282,19 @@ sub get_config
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
 
-	    if ( $config->exists("visibility-policy") ) {
-		$this_app_hash{"visibility-policy"} = {};
-		if ( $config->exists("visibility-policy min-dwell-time-s") ) {
-		    $this_app_hash{"visibility-policy"}{"min-dwell-time-sec"} = $config->returnValue("visibility-policy min-dwell-time-s");
+	    if ( $config->exists("radio-policy") ) {
+		$this_app_hash{"radio-policy"} = {};
+		if ( $config->exists("radio-policy min-dwell-time-s") ) {
+		    $this_app_hash{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time-s");
 		}
-		if ( $config->exists("visibility-policy min-signal-level-dBm") ) {
-		    $this_app_hash{"visibility-policy"}{"min-signal-dbm"} = $config->returnValue("visibility-policy min-signal-level-dBm");
+		if ( $config->exists("radio-policy min-signal-level-dBm") ) {
+		    $this_app_hash{"radio-policy"}{"min-signal-dbm"} = $config->returnValue("radio-policy min-signal-level-dBm");
 		}
-		if ( $config->exists("visibility-policy min-uplink-capacity-Mbps") ) {
-		    $this_app_hash{"visibility-policy"}{"min-uplink-bps"} = int($config->returnValue("visibility-policy min-uplink-capacity-Mbps")*1024*1024);
+		if ( $config->exists("radio-policy min-uplink-capacity-Mbps") ) {
+		    $this_app_hash{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity-Mbps")*1024*1024);
 		}
-		if ( $config->exists("visibility-policy min-downlink-capacity-Mbps") ) {
-		    $this_app_hash{"visibility-policy"}{"min-downlink-bps"} = int($config->returnValue("visibility-policy min-downlink-capacity-Mbps")*1024*1024);
+		if ( $config->exists("radio-policy min-downlink-capacity-Mbps") ) {
+		    $this_app_hash{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity-Mbps")*1024*1024);
 		}
 	    }
 
