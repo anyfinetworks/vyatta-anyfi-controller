@@ -1,3 +1,4 @@
 type:  txt
-help: Minimum downlink capacity in Mbps
-val_help: <xx.xx>; ex. 0.4 for 0.4 Mbps downlink
+help: Minimum available uplink bandwidth
+val_help: <xx.xx>; Bandwidth in megabits per second (Mbps)
+
