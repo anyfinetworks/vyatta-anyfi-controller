@@ -1,7 +1,10 @@
 type: txt
 
-help: Filter string filtering on mac address
+help: Filter on MAC address or Organizational Unique Identifier (OUI)
 
-val_help: <hh:hh:hh>; match all mac addresses matching this OUI (Organizationally unique identifier)
-val_help: <hh:hh:hh:hh:hh:hh>; match this specific mac address only
+val_help: <hh:hh:hh>; match all with this OUI
+val_help: <hh:hh:hh:hh:hh:hh>; match this MAC address only
+val_help: !<hh:hh:hh>; match all except those with this OUI
+val_help: !<hh:hh:hh:hh:hh:hh>; match all except this MAC address
 syntax:expression: exec "/opt/vyatta/bin/vyatta-anyfi-controller-verify.pl --check=mac --data=\"$VAR(@)\""; "bad format"
+

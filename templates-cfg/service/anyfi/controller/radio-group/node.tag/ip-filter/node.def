@@ -1,8 +1,10 @@
 type: txt
 
-help: Filter string filtering on ip address
+help: Filter on IP address or subnet
 
 val_help: ipv4net; match this subnet
-val_help: ipv4; match this specific ip address only
+val_help: ipv4; match this ip address only
+val_help: !ipv4net; match all except this subnet
+val_help: !ipv4; match all except this ip address
 syntax:expression: exec "/opt/vyatta/bin/vyatta-anyfi-controller-verify.pl --check=ip --data=\"$VAR(@)\""; "bad format"
 
