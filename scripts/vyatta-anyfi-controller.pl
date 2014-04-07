@@ -43,7 +43,7 @@ sub check_group {
     my $config = new Vyatta::Config();
     $config->setLevel($controller_level);
 
-    error("$type group $name is not defined at: $controller_level $type-group $name") unless $config->exists("${type}-group $name")	
+    error("$type group $name is not defined.") unless $config->exists("${type}-group $name")	
 }
 
 sub check_client_group {
