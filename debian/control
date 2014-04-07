@@ -12,6 +12,7 @@ Depends: vyatta-cfg-system,
  vyatta-op,
  anyfi-controller, 
  ${misc:Depends}
-Replaces: vyatta-dummy
-Description: Vyatta integration for ANYFI CONTROLLER
- Vyatta ANYFI CONTROLLER integration package
+Replaces: vyatta-anyfi-controller
+Description: Vyatta integration for Anyfi Controller
+ Vyatta integration for Anyfi Controller, a Software-Defined
+ Wireless Networking (SDWN) gateway for carrier Wi-Fi.
