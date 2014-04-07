@@ -1,3 +1,0 @@
-help: Set Anyfi Controller log level
-allowed: echo -n '<trace,debug,info,warning,error,fatal>'
-run: /usr/sbin/anyfi-console loglevel=$5
