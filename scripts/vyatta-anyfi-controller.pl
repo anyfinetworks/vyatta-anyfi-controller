@@ -33,7 +33,7 @@ my $config_path = "/etc/anyfi-controller.xml";
 sub error
 {
     my $msg = shift;
-    print "Error configuring Anyfi Controller: $msg\n";
+    print "Error configuring anyfi controller: $msg\n";
     exit(1);
 }
 
