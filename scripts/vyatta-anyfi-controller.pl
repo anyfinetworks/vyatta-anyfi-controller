@@ -75,16 +75,6 @@ sub get_config
         my @radio_groups = $config->listNodes("radio-group");
         my %radio_hash;
 
-        # Create the any group
-        {
-            my %rg_hash;
-            $rg_hash{"name"} = "any";
-            $rg_hash{"description"} = "automatically generated wildcard group";
-            $rg_hash{"filters"}{"ip-filter"} = "*";
-            $rg_hash{"filters"}{"mac-filter"} = "*";
-            push @{$radio_hash{"radio-group"}}, \%rg_hash;
-        }
-
         for my $rg (@radio_groups)
         {
             $config->setLevel("$controller_level radio-group $rg");
@@ -94,20 +84,12 @@ sub get_config
             $rg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
             $rg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
 
-            if( defined($rg_hash{"filters"}{"ip-filter"}) )
-            {
-                $rg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
-            }
-            else
+            unless( defined($rg_hash{"filters"}{"ip-filter"}) )
             {
                 $rg_hash{"filters"}{"ip-filter"} = "*";
             }
 
-            if( defined($rg_hash{"filters"}{"mac-filter"}) )
-            {
-                $rg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
-            }
-            else
+            unless( defined($rg_hash{"filters"}{"mac-filter"}) )
             {
                 $rg_hash{"filters"}{"mac-filter"} = "*";
             }
@@ -124,16 +106,6 @@ sub get_config
         my @service_groups = $config->listNodes("service-group");
         my %service_hash;
 
-        # Create the any group
-        {
-            my %sg_hash;
-            $sg_hash{"name"} = "any";
-            $sg_hash{"description"} = "automatically generated wildcard group";
-            $sg_hash{"filters"}{"ip-filter"} = "*";
-            $sg_hash{"filters"}{"uuid-filter"} = "*";
-            push @{$service_hash{"service-group"}}, \%sg_hash;
-        }
-
         for my $sg (@service_groups)
         {
             $config->setLevel("$controller_level service-group $sg");
@@ -143,20 +115,12 @@ sub get_config
             $sg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
             $sg_hash{"filters"}{"uuid-filter"} = $config->returnValue("uuid-filter");
 
-            if( defined($sg_hash{"filters"}{"ip-filter"}) )
-            {
-                $sg_hash{"filters"}{"ip-filter"} =~ s/any/\*/g;
-            }
-            else
+	    unless( defined($sg_hash{"filters"}{"ip-filter"}) )
             {
                 $sg_hash{"filters"}{"ip-filter"} = "*";
             }
 
-            if( defined($sg_hash{"filters"}{"uuid-filter"}) )
-            {
-                $sg_hash{"filters"}{"uuid-filter"} =~ s/any/\*/g;
-            }
-            else
+            unless( defined($sg_hash{"filters"}{"uuid-filter"}) )
             {
                 $sg_hash{"filters"}{"uuid-filter"} = "*";
             }
@@ -174,15 +138,6 @@ sub get_config
         my @client_groups = $config->listNodes("client-group");
         my %client_hash;
 
-        # Create the any group
-        {
-            my %cg_hash;
-            $cg_hash{"name"} = "any";
-            $cg_hash{"description"} = "automatically generated wildcard group";
-            $cg_hash{"filters"}{"mac-filter"} = "*";
-            push @{$client_hash{"client-group"}}, \%cg_hash;
-        }
-
         for my $cg (@client_groups)
         {
             $config->setLevel("$controller_level client-group $cg");
@@ -191,11 +146,7 @@ sub get_config
             $cg_hash{"description"} = $config->returnValue("description");
             $cg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
 
-            if( defined($cg_hash{"filters"}{"mac-filter"}) )
-            {
-                $cg_hash{"filters"}{"mac-filter"} =~ s/any/\*/g;
-            }
-            else
+            unless( defined($cg_hash{"filters"}{"mac-filter"}) )
             {
                 $cg_hash{"filters"}{"mac-filter"} = "*";
             }
