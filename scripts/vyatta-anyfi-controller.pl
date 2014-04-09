@@ -43,7 +43,7 @@ sub check_group {
     my $config = new Vyatta::Config();
     $config->setLevel($controller_level);
 
-    error("$type group $name is not defined.") unless $config->exists("${type}-group $name")	
+    error("$type group $name is not defined.") unless $config->exists("${type}-group $name")
 }
 
 sub check_client_group {
@@ -115,7 +115,7 @@ sub get_config
             $sg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
             $sg_hash{"filters"}{"uuid-filter"} = $config->returnValue("uuid-filter");
 
-	    unless( defined($sg_hash{"filters"}{"ip-filter"}) )
+            unless( defined($sg_hash{"filters"}{"ip-filter"}) )
             {
                 $sg_hash{"filters"}{"ip-filter"} = "*";
             }
@@ -174,21 +174,21 @@ sub get_config
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
 
-	    if ( $config->exists("radio-policy") ) {
-		$this_app_hash{"radio-policy"} = {};
-		if ( $config->exists("radio-policy min-dwell-time") ) {
-		    $this_app_hash{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time");
-		}
-		if ( $config->exists("radio-policy min-signal-level") ) {
-		    $this_app_hash{"radio-policy"}{"min-signal-level-dbm"} = $config->returnValue("radio-policy min-signal-level");
-		}
-		if ( $config->exists("radio-policy min-uplink-capacity") ) {
-		    $this_app_hash{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity")*1024*1024);
-		}
-		if ( $config->exists("radio-policy min-downlink-capacity") ) {
-		    $this_app_hash{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity")*1024*1024);
-		}
-	    }
+            if ( $config->exists("radio-policy") ) {
+              $this_app_hash{"radio-policy"} = {};
+              if ( $config->exists("radio-policy min-dwell-time") ) {
+                  $this_app_hash{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time");
+              }
+              if ( $config->exists("radio-policy min-signal-level") ) {
+                  $this_app_hash{"radio-policy"}{"min-signal-level-dbm"} = $config->returnValue("radio-policy min-signal-level");
+              }
+              if ( $config->exists("radio-policy min-uplink-capacity") ) {
+                  $this_app_hash{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity")*1024*1024);
+              }
+              if ( $config->exists("radio-policy min-downlink-capacity") ) {
+                  $this_app_hash{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity")*1024*1024);
+              }
+            }
 
             $this_app_hash{"clients"} = {};
             $this_app_hash{"services"} = {};
@@ -196,19 +196,19 @@ sub get_config
             
             for my $client ($config->returnValues("clients"))
             {
-		check_client_group($client);
+                check_client_group($client);
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
 
             for my $service ($config->returnValues("services"))
             {
-		check_service_group($service);
+                check_service_group($service);
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
 
             for my $radio ($config->returnValues("radios"))
             {
-		check_radio_group($radio);
+                check_radio_group($radio);
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
 
@@ -233,21 +233,21 @@ sub get_config
             $this_app_hash{"name"} = $app;
             $this_app_hash{"description"} = $config->returnValue("description");
 
-	    if ( $config->exists("radio-policy") ) {
-		$this_app_hash{"radio-policy"} = {};
-		if ( $config->exists("radio-policy min-dwell-time-s") ) {
-		    $this_app_hash{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time-s");
-		}
-		if ( $config->exists("radio-policy min-signal-level-dBm") ) {
-		    $this_app_hash{"radio-policy"}{"min-signal-dbm"} = $config->returnValue("radio-policy min-signal-level-dBm");
-		}
-		if ( $config->exists("radio-policy min-uplink-capacity-Mbps") ) {
-		    $this_app_hash{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity-Mbps")*1024*1024);
-		}
-		if ( $config->exists("radio-policy min-downlink-capacity-Mbps") ) {
-		    $this_app_hash{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity-Mbps")*1024*1024);
-		}
-	    }
+            if ( $config->exists("radio-policy") ) {
+                $this_app_hash{"radio-policy"} = {};
+                if ( $config->exists("radio-policy min-dwell-time-s") ) {
+                    $this_app_hash{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time-s");
+                }
+                if ( $config->exists("radio-policy min-signal-level-dBm") ) {
+                    $this_app_hash{"radio-policy"}{"min-signal-dbm"} = $config->returnValue("radio-policy min-signal-level-dBm");
+                }
+                if ( $config->exists("radio-policy min-uplink-capacity-Mbps") ) {
+                    $this_app_hash{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity-Mbps")*1024*1024);
+                }
+                if ( $config->exists("radio-policy min-downlink-capacity-Mbps") ) {
+                    $this_app_hash{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity-Mbps")*1024*1024);
+                }
+            }
 
             $this_app_hash{"clients"} = {};
             $this_app_hash{"services"} = {};
@@ -255,19 +255,19 @@ sub get_config
 
             for my $client ($config->returnValues("clients"))
             {
-		check_client_group($client);
+                check_client_group($client);
                 push @{$this_app_hash{"clients"}{"client"}}, $client;
             }
 
             for my $service ($config->returnValues("services"))
             {
-		check_service_group($service);
+                check_service_group($service);
                 push @{$this_app_hash{"services"}{"service"}}, $service;
             }
 
             for my $radio ($config->returnValues("radios"))
             {
-		check_radio_group($radio);
+                check_radio_group($radio);
                 push @{$this_app_hash{"radios"}{"radio"}}, $radio;
             }
 
