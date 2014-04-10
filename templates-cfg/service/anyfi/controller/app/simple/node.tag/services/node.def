@@ -1,5 +1,4 @@
 multi:
 type: txt
 help: Service groups to filter incoming service requests on
-val_help: any; accept requests from any service
 allowed: cli-shell-api listActiveNodes service anyfi controller service-group

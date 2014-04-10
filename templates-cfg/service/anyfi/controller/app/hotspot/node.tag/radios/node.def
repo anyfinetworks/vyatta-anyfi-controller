@@ -1,5 +1,4 @@
 multi:
 type: txt
 help: Radio groups to filter incoming radio requests on
-val_help: any; accept requests from any radio
 allowed: cli-shell-api listActiveNodes service anyfi controller radio-group
