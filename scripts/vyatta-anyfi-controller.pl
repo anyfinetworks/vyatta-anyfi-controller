@@ -33,7 +33,7 @@ my $config_path = "/etc/anyfi-controller.xml";
 sub error
 {
     my $msg = shift;
-    print "Error configuring anyfi controller: $msg\n";
+    print STDERR "Error configuring anyfi controller: $msg\n";
     exit(1);
 }
 
@@ -297,7 +297,7 @@ sub generate_config
 
 my %config_hash = get_config();
 
-open(HANDLE, '>', $config_path) or error("Error opening $config_path: $!");
+open(HANDLE, '>', $config_path) or error("could not open $config_path for writing.");
 print HANDLE generate_config(\%config_hash);
 close HANDLE;
 

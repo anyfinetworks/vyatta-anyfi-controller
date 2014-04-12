@@ -1,4 +1,4 @@
 tag:
 type: txt
-help: Group of client devices
+help: Group of SDWN clients
 val_help: Client group name

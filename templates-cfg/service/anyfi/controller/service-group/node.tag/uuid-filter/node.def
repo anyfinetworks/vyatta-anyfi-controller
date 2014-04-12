@@ -1,8 +1,8 @@
 type: txt
 
-help: Filter on Universally Unique IDentifier (UUID)
+help: Filter on Universally Unique Identifier (UUID)
 
-val_help: <hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>; match this service UUID only
-val_help: !<hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>; match all except this service UUID
+val_help: <hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>; Match this service UUID only
+val_help: !<hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>; Match all except this service UUID
 syntax:expression: exec "/opt/vyatta/bin/vyatta-anyfi-controller-verify.pl --check=uuid --data=\"$VAR(@)\""; "bad format"
 

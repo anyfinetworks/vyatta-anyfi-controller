@@ -1,4 +1,4 @@
 multi:
 type: txt
-help: Client groups to filter incoming client requests on
+help: Client groups
 allowed: cli-shell-api listActiveNodes service anyfi controller client-group
