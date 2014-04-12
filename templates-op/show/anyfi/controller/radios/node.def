@@ -1,2 +1,2 @@
-help: Show radios connected to the controller
+help: Show connected SDWN radios
 run: /usr/sbin/anyfi-console radios

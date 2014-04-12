@@ -2,9 +2,9 @@ type: txt
 
 help: Filter on MAC address or Organizational Unique Identifier (OUI)
 
-val_help: <hh:hh:hh>; match all with this OUI
-val_help: <hh:hh:hh:hh:hh:hh>; match this MAC address only
-val_help: !<hh:hh:hh>; match all except those with this OUI
-val_help: !<hh:hh:hh:hh:hh:hh>; match all except this MAC address
+val_help: <hh:hh:hh>; Match all with this OUI
+val_help: <hh:hh:hh:hh:hh:hh>; Match this MAC address only
+val_help: !<hh:hh:hh>; Match all except those with this OUI
+val_help: !<hh:hh:hh:hh:hh:hh>; Match all except this MAC address
 syntax:expression: exec "/opt/vyatta/bin/vyatta-anyfi-controller-verify.pl --check=mac --data=\"$VAR(@)\""; "bad format"
 
