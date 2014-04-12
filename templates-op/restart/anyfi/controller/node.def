@@ -1,0 +1,2 @@
+help: Restart anyfi controller
+run: sudo /etc/init.d/anyfi-controller restart
