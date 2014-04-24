@@ -1,3 +1,2 @@
-type: txt
-help: Force disassociation is quality falls below policy
+help: Force disassociation if quality falls below policy
 
