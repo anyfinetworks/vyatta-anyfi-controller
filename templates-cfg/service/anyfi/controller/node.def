@@ -6,7 +6,7 @@ end:
         sudo /etc/init.d/anyfi-controller stop
     elif [ ${COMMIT_ACTION} == ACTIVE ]; then
         sudo /opt/vyatta/sbin/vyatta-anyfi-controller.pl || exit 1
-        sudo /etc/init.d/anyfi-controller restart
+        sudo /etc/init.d/anyfi-controller reload
     else
         sudo /opt/vyatta/sbin/vyatta-anyfi-controller.pl || exit 1
         sudo /etc/init.d/anyfi-controller start
