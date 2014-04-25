@@ -1,3 +1,4 @@
+multi:
 type: txt
 
 help: Filter on IP address or subnet

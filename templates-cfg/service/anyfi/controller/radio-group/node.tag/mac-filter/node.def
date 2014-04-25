@@ -1,3 +1,4 @@
+multi:
 type: txt
 
 help: Filter on MAC address or Organizational Unique Identifier (OUI)

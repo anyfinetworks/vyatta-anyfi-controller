@@ -61,6 +61,107 @@ sub check_radio_group {
     check_group($radio, "radio");
 }
 
+sub generate_group_config {
+    my $vyatta_level = $_[0];
+    my $group_type = $_[1];
+
+    my $config = new Vyatta::Config();  
+    my %group_hash;
+    
+    my @groups = $config->listNodes($vyatta_level);
+    for my $group (@groups) 
+    {
+        my %g_hash;
+        $g_hash{"name"} = $group;
+        $g_hash{"description"} = $config->returnValue("$vyatta_level $group description");
+        
+        $g_hash{"filters"} = {};
+        
+        my @filters = $config->listNodes("$vyatta_level $group");
+        for my $filter (@filters) 
+        {
+            next unless $filter =~ m/.*-filter/;
+            my @filter_values = $config->returnValues("$vyatta_level $group $filter");
+            for my $filter_value (@filter_values) 
+            {
+                push @{$g_hash{"filters"}{"$filter"}}, $filter_value;                                   
+            }                               
+        }
+
+        push @{$group_hash{"${group_type}-group"}}, \%g_hash;
+    }
+    
+    return \%group_hash;
+}
+
+sub generate_app_config {
+    my $vyatta_level = $_[0];
+    my $app_type = $_[1];
+    
+    my $config = new Vyatta::Config();
+    my @apps;
+    
+    # Get app instances
+    my @simple_apps = $config->listNodes($vyatta_level);   
+    my %apps_hash;
+
+    for my $app (@simple_apps)
+    {
+        my %this_app_hash;
+        $this_app_hash{"type"} = $app_type;
+        $this_app_hash{"name"} = $app;
+        $this_app_hash{"description"} = $config->returnValue("$vyatta_level $app description");
+        $this_app_hash{"config"} = {};
+        $this_app_hash{"config"}{"name"} = "";
+        if ( $config->exists("$vyatta_level $app radio-policy") ) {
+            # Read the radio policy settings
+            $this_app_hash{"config"}{"radio-policy"} = {};
+            
+            if ( $config->exists("$vyatta_level $app radio-policy min-dwell-time") ) 
+            {
+                $this_app_hash{"config"}{"radio-policy"}{"min-dwell-time-sec"} = 
+                    $config->returnValue("$vyatta_level $app radio-policy min-dwell-time");
+            }
+            
+            if ( $config->exists("$vyatta_level $app radio-policy min-signal-level") ) 
+            {
+                $this_app_hash{"config"}{"radio-policy"}{"min-signal-level-dbm"} = 
+                    $config->returnValue("$vyatta_level $app radio-policy min-signal-level");
+            }
+            
+            if ( $config->exists("$vyatta_level $app radio-policy min-uplink-capacity") ) 
+            {
+                $this_app_hash{"config"}{"radio-policy"}{"min-uplink-bps"} = 
+                    int($config->returnValue("$vyatta_level $app radio-policy min-uplink-capacity")*1024*1024);
+            }
+            
+            if ( $config->exists("$vyatta_level $app radio-policy min-downlink-capacity") ) 
+            {
+                $this_app_hash{"config"}{"radio-policy"}{"min-downlink-bps"} = 
+                    int($config->returnValue("$vyatta_level $app radio-policy min-downlink-capacity")*1024*1024);
+            }
+            
+            if ( $config->exists("$vyatta_level $app radio-policy kick-out") ) 
+            {
+                $this_app_hash{"config"}{"radio-policy"}{"kick-out"} = "true";
+            }
+        }
+        
+        for my $group_type ("client", "service", "radio")
+        {
+            $this_app_hash{"${group_type}s"} = {};
+            for my $group_name ($config->returnValues("$vyatta_level $app ${group_type}s"))
+            {
+                check_group($group_name, $group_type);
+                push @{$this_app_hash{"${group_type}s"}{$group_type}}, $group_name;
+            }                               
+        }
+        push @apps, \%this_app_hash;
+    }
+    
+    return @apps;
+}
+
 sub get_config
 {
     my $config = new Vyatta::Config();
@@ -70,221 +171,17 @@ sub get_config
     my %groups_hash;
     my %app_hash;
 
-    # Get radio groups
-    {
-        my @radio_groups = $config->listNodes("radio-group");
-        my %radio_hash;
-
-        for my $rg (@radio_groups)
-        {
-            $config->setLevel("$controller_level radio-group $rg");
-            my %rg_hash;
-            $rg_hash{"name"} = $rg;
-            $rg_hash{"description"} = $config->returnValue("description");
-            $rg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
-            $rg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
-
-            unless( defined($rg_hash{"filters"}{"ip-filter"}) )
-            {
-                $rg_hash{"filters"}{"ip-filter"} = "*";
-            }
-
-            unless( defined($rg_hash{"filters"}{"mac-filter"}) )
-            {
-                $rg_hash{"filters"}{"mac-filter"} = "*";
-            }
-            
-            push @{$radio_hash{"radio-group"}}, \%rg_hash;
-            $config->setLevel($controller_level);
-        }
-
-        push @{$groups_hash{"radio-groups"}}, \%radio_hash;
-    }
-
-    # Get service groups
-    {
-        my @service_groups = $config->listNodes("service-group");
-        my %service_hash;
-
-        for my $sg (@service_groups)
-        {
-            $config->setLevel("$controller_level service-group $sg");
-            my %sg_hash;
-            $sg_hash{"name"} = $sg;
-            $sg_hash{"description"} = $config->returnValue("description");
-            $sg_hash{"filters"}{"ip-filter"} = $config->returnValue("ip-filter");
-            $sg_hash{"filters"}{"uuid-filter"} = $config->returnValue("uuid-filter");
-
-            unless( defined($sg_hash{"filters"}{"ip-filter"}) )
-            {
-                $sg_hash{"filters"}{"ip-filter"} = "*";
-            }
-
-            unless( defined($sg_hash{"filters"}{"uuid-filter"}) )
-            {
-                $sg_hash{"filters"}{"uuid-filter"} = "*";
-            }
-
-            
-            push @{$service_hash{"service-group"}}, \%sg_hash;
-            $config->setLevel($controller_level);
-        }
-
-        push @{$groups_hash{"service-groups"}}, \%service_hash;
-    }
-
-    # Get client groups
-    {
-        my @client_groups = $config->listNodes("client-group");
-        my %client_hash;
-
-        for my $cg (@client_groups)
-        {
-            $config->setLevel("$controller_level client-group $cg");
-            my %cg_hash;
-            $cg_hash{"name"} = $cg;
-            $cg_hash{"description"} = $config->returnValue("description");
-            $cg_hash{"filters"}{"mac-filter"} = $config->returnValue("mac-filter");
-
-            unless( defined($cg_hash{"filters"}{"mac-filter"}) )
-            {
-                $cg_hash{"filters"}{"mac-filter"} = "*";
-            }
-            
-            push @{$client_hash{"client-group"}}, \%cg_hash;
-            $config->setLevel($controller_level);
-        }
-
-        push @{$groups_hash{"client-groups"}}, \%client_hash;
-    }
+    # Get groups
+    push @{$groups_hash{"radio-groups"}}, generate_group_config("$controller_level radio-group", "radio");
+    push @{$groups_hash{"service-groups"}}, generate_group_config("$controller_level service-group", "service");
+    push @{$groups_hash{"client-groups"}}, generate_group_config("$controller_level client-group", "client");
 
     $config_hash{"groups"} = \%groups_hash ;
 
-    # Get simple apps
-    if( $config->exists("app simple") )
-    {
-        my @simple_apps = $config->listNodes("app simple");
-        my %simple_hash;
-
-        for my $app (@simple_apps)
-        {
-            $config->setLevel("$controller_level app simple $app");
-            my %this_app_hash;
-            $this_app_hash{"type"} = "simple";
-            $this_app_hash{"name"} = $app;
-            $this_app_hash{"description"} = $config->returnValue("description");
-            $this_app_hash{"config"} = {};
-            $this_app_hash{"config"}{"name"} = "";
-
-            if ( $config->exists("radio-policy") ) {
-              $this_app_hash{"config"}{"radio-policy"} = {};
-              if ( $config->exists("radio-policy min-dwell-time") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time");
-              }
-              if ( $config->exists("radio-policy min-signal-level") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-signal-level-dbm"} = $config->returnValue("radio-policy min-signal-level");
-              }
-              if ( $config->exists("radio-policy min-uplink-capacity") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity")*1024*1024);
-              }
-              if ( $config->exists("radio-policy min-downlink-capacity") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity")*1024*1024);
-              }
-               if ( $config->exists("radio-policy kick-out") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"kick-out"} = "true";
-              }
-            }
-
-            $this_app_hash{"clients"} = {};
-            $this_app_hash{"services"} = {};
-            $this_app_hash{"radios"} = {};
-            
-            for my $client ($config->returnValues("clients"))
-            {
-                check_client_group($client);
-                push @{$this_app_hash{"clients"}{"client"}}, $client;
-            }
-
-            for my $service ($config->returnValues("services"))
-            {
-                check_service_group($service);
-                push @{$this_app_hash{"services"}{"service"}}, $service;
-            }
-
-            for my $radio ($config->returnValues("radios"))
-            {
-                check_radio_group($radio);
-                push @{$this_app_hash{"radios"}{"radio"}}, $radio;
-            }
-
-            push @{$app_hash{"app"}}, \%this_app_hash;
-            $config->setLevel($controller_level);
-        }
-    }
-
-    # Get hotspot apps
-    if( $config->exists("app hotspot") )
-    {
-        my @hotspot_apps = $config->listNodes("app hotspot");
-        my %hotspot_hash;
-
-        for my $app (@hotspot_apps)
-        {
-            $config->setLevel("$controller_level app hotspot $app");
-            my %this_app_hash;
-            $this_app_hash{"type"} = "hotspot";
-            $this_app_hash{"name"} = $app;
-            $this_app_hash{"description"} = $config->returnValue("description");
-            $this_app_hash{"config"} = {};
-            $this_app_hash{"config"}{"name"} = "";
-
-            if ( $config->exists("radio-policy") ) {
-              $this_app_hash{"config"}{"radio-policy"} = {};
-              if ( $config->exists("radio-policy min-dwell-time") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-dwell-time-sec"} = $config->returnValue("radio-policy min-dwell-time");
-              }
-              if ( $config->exists("radio-policy min-signal-level") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-signal-level-dbm"} = $config->returnValue("radio-policy min-signal-level");
-              }
-              if ( $config->exists("radio-policy min-uplink-capacity") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-uplink-bps"} = int($config->returnValue("radio-policy min-uplink-capacity")*1024*1024);
-              }
-              if ( $config->exists("radio-policy min-downlink-capacity") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"min-downlink-bps"} = int($config->returnValue("radio-policy min-downlink-capacity")*1024*1024);
-              }
-               if ( $config->exists("radio-policy kick-out") ) {
-                  $this_app_hash{"config"}{"radio-policy"}{"kick-out"} = "true";
-              }
-            }
-
-            $this_app_hash{"clients"} = {};
-            $this_app_hash{"services"} = {};
-            $this_app_hash{"radios"} = {};
-
-            for my $client ($config->returnValues("clients"))
-            {
-                check_client_group($client);
-                push @{$this_app_hash{"clients"}{"client"}}, $client;
-            }
-
-            for my $service ($config->returnValues("services"))
-            {
-                check_service_group($service);
-                push @{$this_app_hash{"services"}{"service"}}, $service;
-            }
-
-            for my $radio ($config->returnValues("radios"))
-            {
-                check_radio_group($radio);
-                push @{$this_app_hash{"radios"}{"radio"}}, $radio;
-            }
-
-            push @{$app_hash{"app"}}, \%this_app_hash;
-            $config->setLevel($controller_level);
-        }
-    }
-
-    $config_hash{"groups"} = \%groups_hash ;
+    # Get apps
+    push @{$app_hash{"app"}}, generate_app_config("$controller_level app simple", "simple");
+    push @{$app_hash{"app"}}, generate_app_config("$controller_level app hotspot", "hotspot");
+    
     $config_hash{"apps"} = \%app_hash;
 
     # Hardcoded parts
@@ -306,6 +203,5 @@ my %config_hash = get_config();
 open(HANDLE, '>', $config_path) or error("could not open $config_path for writing.");
 print HANDLE generate_config(\%config_hash);
 close HANDLE;
-
 
 exit(0);
