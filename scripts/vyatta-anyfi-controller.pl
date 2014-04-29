@@ -111,12 +111,12 @@ sub generate_app_config {
         $this_app_hash{"type"} = $app_type;
         $this_app_hash{"name"} = $app;
         $this_app_hash{"description"} = $config->returnValue("$vyatta_level $app description");
-	if ( $config->exists("$vyatta_level $app broadcast-ssid") ) {
-	    $this_app_hash{"broadcast-ssid"} = "true";
-	}
 
         $this_app_hash{"config"} = {};
         $this_app_hash{"config"}{"name"} = "";
+	if ( $config->exists("$vyatta_level $app broadcast-ssid") ) {
+	    $this_app_hash{"config"}{"broadcast-ssid"} = "true";
+	}
         if ( $config->exists("$vyatta_level $app radio-policy") ) {
             # Read the radio policy settings
             $this_app_hash{"config"}{"radio-policy"} = {};
