@@ -1,0 +1,4 @@
+type: txt
+help: license key
+syntax:expression: exec "/usr/sbin/anyfi-controller --verify-key $VAR(@) 2> /dev/null"; "bad format"
+
