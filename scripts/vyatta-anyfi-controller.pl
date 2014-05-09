@@ -94,6 +94,21 @@ sub generate_group_config {
     return \%group_hash;
 }
 
+sub generate_license_config {
+    my $vyatta_level = $_[0];
+
+    my $config = new Vyatta::Config();  
+    my @licenses_list;
+    
+    if ($config->exists("$vyatta_level license-key"))
+    {
+	my %l_hash;
+	$l_hash{"key"} = $config->returnValue("$vyatta_level license-key");
+	push @licenses_list, \%l_hash;
+    }
+    
+    return @licenses_list;
+}
 sub generate_app_config {
     my $vyatta_level = $_[0];
     my $app_type = $_[1];
@@ -174,6 +189,7 @@ sub get_config
     my %config_hash;
     my %groups_hash;
     my %app_hash;
+    my %licenses_hash;
 
     # Get groups
     push @{$groups_hash{"radio-groups"}}, generate_group_config("$controller_level radio-group", "radio");
@@ -187,7 +203,11 @@ sub get_config
     push @{$app_hash{"app"}}, generate_app_config("$controller_level app hotspot", "hotspot");
     
     $config_hash{"apps"} = \%app_hash;
-
+    
+    # Get license
+    push @{$licenses_hash{"license"}}, generate_license_config("$controller_level");
+    $config_hash{"licenses"} = \%licenses_hash;
+    
     # Hardcoded parts
     $config_hash{"interface"}{"port"} = 6726;
     $config_hash{"interface"}{"address"} = "0.0.0.0";

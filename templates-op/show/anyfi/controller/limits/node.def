@@ -1,3 +1,3 @@
 help: Show enforced limitations of controller license
-run: /usr/sbin/anyfi-console limitations
+run: /usr/sbin/anyfi-console limits
      echo "Getting close to the limits? Contact sales@anyfinetworks.com in good time."
