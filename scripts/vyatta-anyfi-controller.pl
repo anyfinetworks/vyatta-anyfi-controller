@@ -100,10 +100,14 @@ sub generate_license_config {
     my $config = new Vyatta::Config();  
     my @licenses_list;
     
-    if ($config->exists("$vyatta_level license-key"))
+    if ($config->exists("$vyatta_level license key"))
     {
+	my $key = $config->returnValue("$vyatta_level license key");
+	my $cmd = "/usr/sbin/anyfi-controller --verify-key $key 2> /dev/null";
+	system($cmd);
+
 	my %l_hash;
-	$l_hash{"key"} = $config->returnValue("$vyatta_level license-key");
+	$l_hash{"key"} = $key;
 	push @licenses_list, \%l_hash;
     }
     
