@@ -1,4 +1,3 @@
 type: txt
 help: License key
-syntax:expression: exec "/usr/sbin/anyfi-controller --verify-key $VAR(@) > /dev/null"; "Invalid license key"
-
+syntax:expression: exec "if [ \"$COMMIT_VIA\" == \"boot-config-loader\" ] ; then echo \"Skipping syntax expression check due to commit issued at boot\"; else /usr/sbin/anyfi-controller --verify-key $VAR(@) --verify-key-expiry > /dev/null ; fi"; "Invalid license key"
