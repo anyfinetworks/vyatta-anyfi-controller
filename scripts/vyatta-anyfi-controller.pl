@@ -102,13 +102,13 @@ sub generate_license_config {
     
     if ($config->exists("$vyatta_level license key"))
     {
-	my $key = $config->returnValue("$vyatta_level license key");
-	my $cmd = "/usr/sbin/anyfi-controller --verify-key $key 2> /dev/null";
-	system($cmd);
+      my $key = $config->returnValue("$vyatta_level license key");
+      my $cmd = "/usr/sbin/anyfi-controller --verify-key $key 2> /dev/null";
+      system($cmd);
 
-	my %l_hash;
-	$l_hash{"key"} = $key;
-	push @licenses_list, \%l_hash;
+      my %l_hash;
+      $l_hash{"key"} = $key;
+      push @licenses_list, \%l_hash;
     }
     
     return @licenses_list;
@@ -133,9 +133,9 @@ sub generate_app_config {
 
         $this_app_hash{"config"} = {};
         $this_app_hash{"config"}{"name"} = "";
-	if ( $config->exists("$vyatta_level $app broadcast-ssid") ) {
-	    $this_app_hash{"config"}{"broadcast-ssid"} = "true";
-	}
+        if ( $config->exists("$vyatta_level $app broadcast-ssid") ) {
+            $this_app_hash{"config"}{"broadcast-ssid"} = "true";
+        }
         if ( $config->exists("$vyatta_level $app radio-policy") ) {
             # Read the radio policy settings
             $this_app_hash{"config"}{"radio-policy"} = {};
