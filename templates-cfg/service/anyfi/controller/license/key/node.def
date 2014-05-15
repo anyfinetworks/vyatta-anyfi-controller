@@ -1,3 +1,11 @@
 type: txt
 help: License key [REQUIRED]
-syntax:expression: exec "if [ \"$COMMIT_VIA\" == \"boot-config-loader\" ] ; then echo \"Skipping syntax expression check due to commit issued at boot\"; else /usr/sbin/anyfi-controller --verify-key $VAR(@) --verify-key-expiry ; fi"; "License verification failed"
+syntax:expression: exec "echo $VAR(@) | base64 -d 2> /dev/null | wc -c | grep -q '^128$'"; "Unrecognized license key format"
+end:
+    if [ ${COMMIT_VIA} != 'boot-config-loader' ]; then
+        if [ ${COMMIT_ACTION} = 'SET' ]; then
+            /usr/sbin/anyfi-controller --verify-key $VAR(@) --verify-key-expiry
+        elif [ ${COMMIT_ACTION} = 'DELETE' ]; then
+            echo "Uninstalling license key..."
+        fi
+    fi
