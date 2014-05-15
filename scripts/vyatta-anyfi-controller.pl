@@ -103,8 +103,9 @@ sub generate_license_config {
     if ($config->exists("$vyatta_level license key"))
     {
       my $key = $config->returnValue("$vyatta_level license key");
-      my $cmd = "/usr/sbin/anyfi-controller --verify-key $key 2> /dev/null";
-      system($cmd);
+
+      # Only print warnings and errors (and never fail):
+      system("/usr/sbin/anyfi-controller --verify-key $key > /dev/null");
 
       my %l_hash;
       $l_hash{"key"} = $key;
