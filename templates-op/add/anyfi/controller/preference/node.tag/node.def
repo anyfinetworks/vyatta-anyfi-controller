@@ -1,0 +1,2 @@
+help: Service UUID
+allowed: echo -n '<hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>'

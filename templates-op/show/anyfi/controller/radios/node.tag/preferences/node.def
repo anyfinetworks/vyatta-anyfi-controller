@@ -1,0 +1,2 @@
+help: Show preferences for this radio
+run: /usr/sbin/anyfi-console preferences=$5
