@@ -1,0 +1,2 @@
+help: Delete preferences for this service
+run: /usr/sbin/anyfi-console preferences=$5

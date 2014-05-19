@@ -1,0 +1,2 @@
+help: Show stored preferences
+run: /usr/sbin/anyfi-console preferences

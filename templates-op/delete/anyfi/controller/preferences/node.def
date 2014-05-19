@@ -1,0 +1,3 @@
+help: Delete stored preferences
+run: read -r -p "Are you sure you want to clear all preferences? [y/N] " response && case $response in [yY][eE][sS]|[yY]) echo "Deleting all preferences!" && /usr/sbin/anyfi-console preferences.clear;; *) echo "Aborting";; esac
+
