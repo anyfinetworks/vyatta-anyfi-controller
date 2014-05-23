@@ -1,2 +1,2 @@
-help: Delete information related to this service
+help: Delete information related to this SDWN service
 allowed: echo -n '<hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>'

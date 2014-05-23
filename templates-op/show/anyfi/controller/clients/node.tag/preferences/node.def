@@ -1,2 +1,2 @@
-help: Delete preferences for this radio
+help: Show preferences for this SDWN client
 run: /usr/sbin/anyfi-console preferences=$5

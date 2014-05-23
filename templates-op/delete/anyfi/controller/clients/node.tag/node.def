@@ -1,0 +1,2 @@
+help: Delete information related to this SDWN client
+allowed: echo -n '<hh:hh:hh:hh:hh:hh>'

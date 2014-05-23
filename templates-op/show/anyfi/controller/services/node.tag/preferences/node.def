@@ -1,2 +1,0 @@
-help: Show preferences for this service
-run: /usr/sbin/anyfi-console preferences=$5
