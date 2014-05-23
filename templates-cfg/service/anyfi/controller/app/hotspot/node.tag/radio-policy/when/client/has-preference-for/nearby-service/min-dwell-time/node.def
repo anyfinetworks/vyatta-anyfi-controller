@@ -1,0 +1,4 @@
+type: u32
+help: Minimum time that device must remain stationary
+val_help: u32; Time in seconds (s)
+
