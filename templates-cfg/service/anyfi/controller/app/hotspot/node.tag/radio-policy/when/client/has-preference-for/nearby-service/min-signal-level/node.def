@@ -1,0 +1,4 @@
+type: txt
+help: Minimum received signal strength
+val_help: <-95-0>; Signal level in decibels of 1 mW (dBm)
+

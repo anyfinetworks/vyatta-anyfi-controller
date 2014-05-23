@@ -47,6 +47,14 @@ For a more complete description see the
                             min-downlink-capacity <float: MIN UPLINK CAPACITY IN MBPS>
                             min-dwell-time <u8: MIN DWELL TIME IN SECONDS>
                             kick-out
+                            when
+                                client
+                                    has-preference-for
+                                        nearby-service
+                                            [radio-policy]
+                                service
+                                    is-nearby
+                                        [radio-policy]
 
                     hotspot <txt: INSTANCE NAME>
                         description <txt: DESCRIPTION>
@@ -60,6 +68,11 @@ For a more complete description see the
                             min-downlink-capacity <float: MIN UPLINK CAPACITY IN MBPS>
                             min-dwell-time <u8: MIN DWELL TIME IN SECONDS>
                             kick-out
+                            when
+                                client
+                                    has-preference-for
+                                        nearby-service
+                                            [radio-policy]
 
 # Operational Commands
 
