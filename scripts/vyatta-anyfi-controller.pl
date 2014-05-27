@@ -114,6 +114,50 @@ sub generate_license_config {
     
     return @licenses_list;
 }
+
+sub generate_radio_policy {
+    my $vyatta_level = $_[0];
+    my %result;
+
+    my $config = new Vyatta::Config();
+    
+    if ( $config->exists("$vyatta_level min-dwell-time") ) 
+    {
+        $result{"min-dwell-time-sec"} = 
+        $config->returnValue("$vyatta_level min-dwell-time");
+    }
+            
+    if ( $config->exists("$vyatta_level min-signal-level") ) 
+    {
+        $result{"min-signal-level-dbm"} = 
+        $config->returnValue("$vyatta_level min-signal-level");
+    }
+            
+    if ( $config->exists("$vyatta_level min-uplink-capacity") ) 
+    {
+        $result{"min-uplink-bps"} = 
+        int($config->returnValue("$vyatta_level min-uplink-capacity")*1024*1024);
+    }
+            
+    if ( $config->exists("$vyatta_level min-downlink-capacity") ) 
+    {
+        $result{"min-downlink-bps"} = 
+        int($config->returnValue("$vyatta_level min-downlink-capacity")*1024*1024);
+    }
+            
+    if ( $config->exists("$vyatta_level kick-out") ) 
+    {
+        $result{"kick-out"} = "true";
+    }
+    
+    if ( $config->exists("$vyatta_level suppress") ) 
+    {
+        $result{"suppress"} = "true";
+    }
+    
+    return \%result;
+}
+
 sub generate_app_config {
     my $vyatta_level = $_[0];
     my $app_type = $_[1];
@@ -139,36 +183,17 @@ sub generate_app_config {
         }
         if ( $config->exists("$vyatta_level $app radio-policy") ) {
             # Read the radio policy settings
-            $this_app_hash{"config"}{"radio-policy"} = {};
-            
-            if ( $config->exists("$vyatta_level $app radio-policy min-dwell-time") ) 
-            {
-                $this_app_hash{"config"}{"radio-policy"}{"min-dwell-time-sec"} = 
-                    $config->returnValue("$vyatta_level $app radio-policy min-dwell-time");
-            }
-            
-            if ( $config->exists("$vyatta_level $app radio-policy min-signal-level") ) 
-            {
-                $this_app_hash{"config"}{"radio-policy"}{"min-signal-level-dbm"} = 
-                    $config->returnValue("$vyatta_level $app radio-policy min-signal-level");
-            }
-            
-            if ( $config->exists("$vyatta_level $app radio-policy min-uplink-capacity") ) 
-            {
-                $this_app_hash{"config"}{"radio-policy"}{"min-uplink-bps"} = 
-                    int($config->returnValue("$vyatta_level $app radio-policy min-uplink-capacity")*1024*1024);
-            }
-            
-            if ( $config->exists("$vyatta_level $app radio-policy min-downlink-capacity") ) 
-            {
-                $this_app_hash{"config"}{"radio-policy"}{"min-downlink-bps"} = 
-                    int($config->returnValue("$vyatta_level $app radio-policy min-downlink-capacity")*1024*1024);
-            }
-            
-            if ( $config->exists("$vyatta_level $app radio-policy kick-out") ) 
-            {
-                $this_app_hash{"config"}{"radio-policy"}{"kick-out"} = "true";
-            }
+            $this_app_hash{"config"}{"radio-policy"} = generate_radio_policy("$vyatta_level $app radio-policy");                     
+        }
+        
+        if ( $config->exists("$vyatta_level $app radio-policy when client has-preference-for nearby-service") ) {
+            # Read the radio policy settings
+            $this_app_hash{"config"}{"radio-policy-sta-local"} = generate_radio_policy("$vyatta_level $app radio-policy when client has-preference-for nearby-service");                     
+        }
+        
+        if ( $config->exists("$vyatta_level $app radio-policy when when service is-nearby") ) {
+            # Read the radio policy settings
+            $this_app_hash{"config"}{"radio-policy-service-local"} = generate_radio_policy("$vyatta_level $app radio-policy when service is-nearby");                     
         }
         
         for my $group_type ("client", "service", "radio")
