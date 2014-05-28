@@ -1,2 +1,2 @@
 help: Delete preferences for this SDWN service
-run: /usr/sbin/anyfi-console preferences.clear=$5
+run: /usr/sbin/anyfi-console preferences.service.clear=$5
