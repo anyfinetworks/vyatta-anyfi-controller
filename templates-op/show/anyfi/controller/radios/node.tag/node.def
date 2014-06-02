@@ -1,0 +1,2 @@
+help: Show information for this SDWN radio
+allowed: echo -n '<hh:hh:hh:hh:hh:hh>'

@@ -1,0 +1,2 @@
+help: Show stored proximity information
+run: /usr/sbin/anyfi-console proximity
