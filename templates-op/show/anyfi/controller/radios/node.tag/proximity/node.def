@@ -1,0 +1,2 @@
+help: Show proximity info for this SDWN radio
+run: /usr/sbin/anyfi-console proximity.radio=$5
