@@ -191,7 +191,7 @@ sub generate_app_config {
             $this_app_hash{"config"}{"radio-policy-sta-local"} = generate_radio_policy("$vyatta_level $app radio-policy when client has-preference-for nearby-service");                     
         }
         
-        if ( $config->exists("$vyatta_level $app radio-policy when when service is-nearby") ) {
+        if ( $config->exists("$vyatta_level $app radio-policy when service is-nearby") ) {
             # Read the radio policy settings
             $this_app_hash{"config"}{"radio-policy-service-local"} = generate_radio_policy("$vyatta_level $app radio-policy when service is-nearby");                     
         }
