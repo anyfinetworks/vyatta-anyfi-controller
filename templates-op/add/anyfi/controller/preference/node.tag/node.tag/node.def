@@ -1,3 +1,0 @@
-help: Sta mac
-allowed: echo -n '<hh:hh:hh:hh:hh:hh>'
-run: /usr/sbin/anyfi-console preferences.add=$5=$6
