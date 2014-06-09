@@ -195,6 +195,11 @@ sub generate_app_config {
             # Read the radio policy settings
             $this_app_hash{"config"}{"radio-policy-service-local"} = generate_radio_policy("$vyatta_level $app radio-policy when service is-nearby");                     
         }
+
+	if ( $config->exists("$vyatta_level $app max-clients-per-service")
+        {
+	    $this_app_hash{"config"}{"max-preference-order"} = $config->returnValue("$vyatta_level $app max-clients-per-service");
+        }
         
         for my $group_type ("client", "service", "radio")
         {
