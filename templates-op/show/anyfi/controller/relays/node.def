@@ -1,2 +1,2 @@
-help: Show connected SDWN relays and optimizers
+help: Show connected relays (optimizers)
 run: /usr/sbin/anyfi-console relays

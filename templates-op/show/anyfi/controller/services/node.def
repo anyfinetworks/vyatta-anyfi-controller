@@ -1,2 +1,2 @@
-help: Show connected SDWN services
+help: Show connected services
 run: /usr/sbin/anyfi-console services

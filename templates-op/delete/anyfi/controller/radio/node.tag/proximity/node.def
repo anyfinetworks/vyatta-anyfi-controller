@@ -1,0 +1,2 @@
+help: Delete all proximity information for this radio
+run: /usr/sbin/anyfi-console proximity.radio.clear=$5
