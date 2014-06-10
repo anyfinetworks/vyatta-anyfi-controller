@@ -10,7 +10,8 @@ Architecture: all
 Depends: vyatta-cfg-system,
  vyatta-cfg,
  vyatta-op,
- anyfi-controller, 
+ vyatta-anyfi-common,
+ anyfi-controller,
  ${misc:Depends}
 Replaces: vyatta-anyfi-controller
 Description: Vyatta integration for Anyfi Controller
