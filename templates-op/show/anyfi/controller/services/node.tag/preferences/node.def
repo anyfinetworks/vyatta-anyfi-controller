@@ -1,2 +1,0 @@
-help: Show preferences for this SDWN service
-run: /usr/sbin/anyfi-console preferences.service=$5

@@ -1,0 +1,2 @@
+help: Delete this client's preferences
+run: /usr/sbin/anyfi-console preferences.sta.clear=$5

@@ -1,0 +1,2 @@
+help: Client MAC address
+allowed: echo -n '<hh:hh:hh:hh:hh:hh>'

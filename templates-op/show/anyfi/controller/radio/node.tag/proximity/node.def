@@ -1,0 +1,2 @@
+help: Show proximity information for this radio
+run: /usr/sbin/anyfi-console proximity.radio=$5

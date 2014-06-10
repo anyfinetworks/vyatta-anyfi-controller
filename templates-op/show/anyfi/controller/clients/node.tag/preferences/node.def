@@ -1,2 +1,0 @@
-help: Show preferences for this SDWN client
-run: /usr/sbin/anyfi-console preferences.sta=$5
