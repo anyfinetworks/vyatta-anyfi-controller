@@ -1,0 +1,3 @@
+help: Service UUID
+allowed: echo -n '<hhhhhhh-hhhh-hhhh-hhhh-hhhhhhhhhhhh>'
+run: /usr/sbin/anyfi-console preferences.add=$8=$6
