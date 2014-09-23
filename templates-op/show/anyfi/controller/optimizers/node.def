@@ -1,0 +1,2 @@
+help: Show connected optimizers
+run: /usr/sbin/anyfi-console relays
