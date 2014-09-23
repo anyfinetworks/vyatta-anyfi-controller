@@ -6,7 +6,8 @@ bin_sudo_usersdir = $(bindir)/sudo-users
 vprefix = /opt/vyatta
 vsbindir = $(vprefix)/sbin
 
-sbin_SCRIPTS = scripts/vyatta-anyfi-controller.pl
+sbin_SCRIPTS = scripts/vyatta-anyfi-controller.pl \
+               scripts/vyatta-anyfi-controllermon
 
 bin_SCRIPTS = scripts/vyatta-anyfi-controller-verify.pl
 
