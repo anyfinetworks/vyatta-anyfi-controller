@@ -3,6 +3,7 @@ priority: 999
 end:
     if [ ${COMMIT_ACTION} == DELETE ]; then
         sudo rm -f /etc/anyfi-controller.xml
+        sudo killall -TERM vyatta-anyfi-controllermon > /dev/null 2>&1
         sudo /etc/init.d/anyfi-controller stop
     elif [ ${COMMIT_ACTION} == ACTIVE ]; then
         sudo /opt/vyatta/sbin/vyatta-anyfi-controller.pl || exit 1
@@ -10,6 +11,7 @@ end:
     else
         sudo /opt/vyatta/sbin/vyatta-anyfi-controller.pl || exit 1
         sudo /etc/init.d/anyfi-controller start
+        sudo /opt/vyatta/sbin/vyatta-anyfi-controllermon
     fi
 
 
