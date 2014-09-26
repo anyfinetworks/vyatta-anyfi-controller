@@ -1,10 +1,10 @@
 #!/bin/sh
 
 is_ok() {
-    local pid=$1
+    local pid=$(pidof anyfi-controller)
 
     # There is no controller
-    test -d /proc/$pid || return 1
+    [ -z "$pid" ] && return 1
 
     # Unresponsive anyfi-console
     anyfi-console & sleep 1 ; kill $! && return 1
@@ -13,12 +13,11 @@ is_ok() {
 }
 
 monitor() {
-    local pid=$1
 
     trap "exit 0" TERM
 
     while true; do
-        if ! is_ok $pid; then
+        if ! is_ok; then
             /etc/init.d/anyfi-controller restart
         fi
         # Sleep but awake immediately if there's a signal
@@ -33,6 +32,6 @@ monitor() {
 # Daemonize
 cd /tmp
 exec 0<&- 1>&- 2>&-
-monitor $(pidof anyfi-controller) &
+monitor &
 
 exit 0
