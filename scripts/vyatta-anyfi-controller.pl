@@ -242,6 +242,9 @@ sub get_config
     # Get license
     push @{$licenses_hash{"license"}}, generate_license_config("$controller_level");
     $config_hash{"licenses"} = \%licenses_hash;
+
+    # Get RSA key pair
+    $config_hash{"rsa-key-pair"}{"file"} = $config->returnValue("rsa-key-pair file");
     
     # Hardcoded parts
     $config_hash{"interface"}{"port"} = 6726;

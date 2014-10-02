@@ -1,0 +1,43 @@
+help: Generate RSA key pair file with specified path
+allowed: echo -n '<filename>'
+run:
+    FILE=$(readlink -f "$5")
+    BITS=2048
+
+    echo -n "Generating $BITS bit RSA key pair to file ${FILE}... "
+
+    if ! [ -f $FILE ]; then
+        CONTROLLER_KEY=$(/opt/vyatta/bin/vyatta-anyfi-keygen -b $BITS -f $FILE)
+        if [ "$?" -eq 0 ]; then
+            echo "Done."
+
+            cat << EOF
+
+=== INSTRUCTIONS ================================================
+
+1) Configure your Controller with the RSA key pair:
+
+   $ configure
+   # edit service anyfi controller
+   # set rsa-key-pair file ${FILE}
+   # ...
+   # commit
+   # save
+   # exit
+
+2) Configure your CPE with the controller key below, using
+   its WEBUI, CLI or TR-069 interface (vendor extension
+   InternetGatewayDevice.X_ANYFI_NET_Config.ControllerKey).
+
+=== CONTROLLER KEY ==============================================
+
+$CONTROLLER_KEY
+
+EOF
+        else
+            echo "Failed."
+        fi
+    else
+        echo "Failed, file exists!"
+    fi
+    /opt/vyatta/sbin/check_file_in_config_dir "$5" '/config/auth'
