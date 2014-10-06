@@ -244,7 +244,21 @@ sub get_config
     $config_hash{"licenses"} = \%licenses_hash;
 
     # Get RSA key pair
-    $config_hash{"rsa-key-pair"}{"file"} = $config->returnValue("rsa-key-pair file");
+    my $keyfile;
+    if ( $config->exists("rsa-key-pair file") )
+    {
+        $keyfile = $config->returnValue("rsa-key-pair file");
+        system("openssl rsa -in $keyfile -pubout -out /var/run/anyfi-controller.pub 2> /dev/null") &&
+                error("could not extract public key from RSA key pair.");
+    }
+    else
+    {
+        $keyfile = "/var/run/anyfi-controller.pem";
+        system("test -f $keyfile || /opt/vyatta/bin/vyatta-anyfi-keygen -b 2048 -f $keyfile") &&
+                error("could not generate RSA key pair.");
+        unlink("/var/run/anyfi-controller.pub");
+    }
+    $config_hash{"rsa-key-pair"}{"file"} = $keyfile;
     
     # Hardcoded parts
     $config_hash{"interface"}{"port"} = 6726;

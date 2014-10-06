@@ -1,0 +1,7 @@
+help: Show controller key
+run:
+    if [ -f /var/run/anyfi-controller.pub ]; then
+        openssl rsa -in /var/run/anyfi-controller.pub -pubin -pubout -outform DER 2>/dev/null | sha256sum | cut -c1-64
+    else
+        echo "Error: No RSA key pair configured."
+    fi
