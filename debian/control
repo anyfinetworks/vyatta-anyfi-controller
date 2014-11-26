@@ -12,7 +12,7 @@ Depends: vyatta-cfg-system,
  vyatta-op,
  openssl,
  vyatta-anyfi-common (>= 1.1.0),
- anyfi-controller (>= 1.4.0),
+ anyfi-controller (>= 1.4.2),
  ${misc:Depends}
 Replaces: vyatta-anyfi-controller
 Description: Vyatta integration for Anyfi Controller
