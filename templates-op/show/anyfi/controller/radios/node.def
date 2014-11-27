@@ -1,2 +1,2 @@
-help: Show connected radios
+help: List connected radios
 run: /usr/sbin/anyfi-console radios

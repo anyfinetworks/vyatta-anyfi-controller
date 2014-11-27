@@ -1,2 +1,2 @@
-help: Show optimizers for this service
+help: List optimizers for this service
 run: /usr/sbin/anyfi-console relays.service=$5

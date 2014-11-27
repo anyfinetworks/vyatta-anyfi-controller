@@ -1,2 +1,2 @@
-help: Show tunnel termination points for this service
+help: List tunnel termination points for this service
 run: /usr/sbin/anyfi-console ttps.service=$5

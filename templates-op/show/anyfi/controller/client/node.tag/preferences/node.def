@@ -1,2 +1,2 @@
-help: Show the client's preferences
+help: List the client's preferences
 run: /usr/sbin/anyfi-console preferences.sta=$5

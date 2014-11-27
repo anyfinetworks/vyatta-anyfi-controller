@@ -1,2 +1,2 @@
-help: Show connected services
+help: List connected services
 run: /usr/sbin/anyfi-console services
