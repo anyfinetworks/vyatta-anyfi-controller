@@ -254,7 +254,7 @@ sub get_config
     else
     {
         $keyfile = "/var/run/anyfi-controller.pem";
-        system("test -f $keyfile || /opt/vyatta/bin/vyatta-anyfi-keygen -b 2048 -f $keyfile") &&
+        system("test -f $keyfile || /opt/vyatta/bin/vyatta-anyfi-keygen -b 2048 -f $keyfile > /dev/null") &&
                 error("could not generate RSA key pair.");
         unlink("/var/run/anyfi-controller.pub");
     }
