@@ -181,6 +181,14 @@ sub generate_app_config {
         if ( $config->exists("$vyatta_level $app broadcast-ssid") ) {
             $this_app_hash{"config"}{"broadcast-ssid"} = "true";
         }
+        if ( $config->exists("$vyatta_level $app visibility") ) {
+            if ( $config->returnValue("$vyatta_level $app visibility") eq "broadcast" ) {
+                $this_app_hash{"config"}{"broadcast-ssid"} = "true";
+            }
+            elsif ( $config->returnValue("$vyatta_level $app visibility") eq "hidden" ) {
+                $this_app_hash{"config"}{"hidden-ssid"} = "true";
+            }
+        }
         if ( $config->exists("$vyatta_level $app radio-policy") ) {
             # Read the radio policy settings
             $this_app_hash{"config"}{"radio-policy"} = generate_radio_policy("$vyatta_level $app radio-policy");                     

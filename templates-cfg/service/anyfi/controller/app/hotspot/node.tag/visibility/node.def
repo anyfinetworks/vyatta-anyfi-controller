@@ -1,0 +1,5 @@
+type: txt
+help: SSID visibility
+val_help: broadcast; Broadcast the SSID in Beacon frames
+val_help: hidden; Hide the SSID and require clients to probe for it
+syntax:expression: $VAR(@) in "broadcast", "hidden"; "Value must be broadcast or hidden"
