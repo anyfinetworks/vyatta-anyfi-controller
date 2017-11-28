@@ -1,0 +1,4 @@
+type: u32
+help: App priority when resolving bindings
+val_help: u32; Priority, a higher value will have precedence
+

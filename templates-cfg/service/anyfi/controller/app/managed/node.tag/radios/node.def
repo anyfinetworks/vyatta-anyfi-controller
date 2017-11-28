@@ -1,0 +1,4 @@
+multi:
+type: txt
+help: Radio groups
+allowed: cli-shell-api listActiveNodes service anyfi controller radio-group

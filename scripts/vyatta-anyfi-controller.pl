@@ -178,6 +178,9 @@ sub generate_app_config {
 
         $this_app_hash{"config"} = {};
         $this_app_hash{"config"}{"name"} = "";
+        if ( $config->exists("$vyatta_level $app priority") ) {
+            $this_app_hash{"config"}{"priority"} = $config->returnValue("$vyatta_level $app priority")
+        }
         if ( $config->exists("$vyatta_level $app broadcast-ssid") ) {
             $this_app_hash{"config"}{"broadcast-ssid"} = "true";
         }
@@ -244,6 +247,7 @@ sub get_config
     # Get apps
     push @{$app_hash{"app"}}, generate_app_config("$controller_level app simple", "simple");
     push @{$app_hash{"app"}}, generate_app_config("$controller_level app hotspot", "hotspot");
+    push @{$app_hash{"app"}}, generate_app_config("$controller_level app managed", "managed");
     
     $config_hash{"apps"} = \%app_hash;
     

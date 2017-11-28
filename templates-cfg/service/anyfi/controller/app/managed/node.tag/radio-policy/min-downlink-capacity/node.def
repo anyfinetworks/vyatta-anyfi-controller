@@ -1,0 +1,4 @@
+type: txt
+help: Minimum attainable downlink bandwidth
+val_help: <xx.xx>; Bandwidth in megabits per second (Mbps)
+

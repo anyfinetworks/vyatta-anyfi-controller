@@ -1,0 +1,4 @@
+type: u32
+help: Maximum number of clients per service (bindings)
+val_help: u32; Maximum number of clients
+
